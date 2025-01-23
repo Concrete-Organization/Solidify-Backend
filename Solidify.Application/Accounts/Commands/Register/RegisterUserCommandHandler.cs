@@ -6,15 +6,18 @@ using Solidify.Domain.Entities;
 
 namespace Solidify.Application.Accounts.Commands.Register;
 
-public class RegisterCommandHandler(UserManager<ApplicationUser> userManager,
-    SignInManager<ApplicationUser> signInManager, IJwtService jwtService) : IRequestHandler<RegisterCommand, GeneralResponseDto>
+public class RegisterUserCommandHandler(UserManager<ApplicationUser> userManager,
+    SignInManager<ApplicationUser> signInManager) : IRequestHandler<RegisterUserCommand, GeneralResponseDto>
 {
-    public async Task<GeneralResponseDto> Handle(RegisterCommand request, CancellationToken cancellationToken)
+    public async Task<GeneralResponseDto> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
     {
         var user = new ApplicationUser
         {
             UserName = request.UserName,
-            Email = request.Email
+            Email = request.Email,
+            PhoneNumber = request.PhoneNumber,
+            Address = request.Address
+
         };
 
         var result = await userManager.CreateAsync(user, request.Password);
@@ -30,7 +33,7 @@ public class RegisterCommandHandler(UserManager<ApplicationUser> userManager,
             };
         }
 
-       
+
         await userManager.AddToRoleAsync(user, "User");
         await signInManager.SignInAsync(user, isPersistent: false);
 
