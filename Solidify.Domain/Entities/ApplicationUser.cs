@@ -11,9 +11,10 @@ namespace Solidify.Domain.Entities
 {
     public class ApplicationUser : IdentityUser
     {
-        [MaxLength(100)]
+        [MaxLength(250)]
         public string? Address { get; set; }
         public bool IsDeleted { get; set; } = false;
+
         //public virtual Cart Cart { get; set; }
         //public virtual ICollection<Order>? Orders { get; set; } = new HashSet<Order>();
         //public virtual ICollection<Comment>? Comments { get; set; } = new HashSet<Comment>();
