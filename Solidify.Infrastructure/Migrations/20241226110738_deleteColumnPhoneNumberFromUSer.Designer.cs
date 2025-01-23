@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Solidify.Infrastructure.Persistance;
 
@@ -11,9 +12,11 @@ using Solidify.Infrastructure.Persistance;
 namespace Solidify.Infrastructure.Migrations
 {
     [DbContext(typeof(SolidifyDbContext))]
-    partial class SolidifyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241226110738_deleteColumnPhoneNumberFromUSer")]
+    partial class deleteColumnPhoneNumberFromUSer
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

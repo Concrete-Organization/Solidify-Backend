@@ -3,7 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Solidify.Domain.Entities;
+using Solidify.Domain.Interfaces;
 using Solidify.Infrastructure.Persistance;
+using Solidify.Infrastructure.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +34,9 @@ namespace Solidify.Infrastructure.Extentions
             })
             .AddEntityFrameworkStores<SolidifyDbContext>()
             .AddDefaultTokenProviders();
+
+            services.AddScoped<IEngineerRepository, EngineerRepository>();
+            services.AddScoped<ICompanyRepository, CompanyRepository>();
         }
     }
 }

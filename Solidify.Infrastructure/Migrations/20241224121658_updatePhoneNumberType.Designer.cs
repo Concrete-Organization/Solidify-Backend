@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Solidify.Infrastructure.Persistance;
 
@@ -11,9 +12,11 @@ using Solidify.Infrastructure.Persistance;
 namespace Solidify.Infrastructure.Migrations
 {
     [DbContext(typeof(SolidifyDbContext))]
-    partial class SolidifyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241224121658_updatePhoneNumberType")]
+    partial class updatePhoneNumberType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -199,6 +202,7 @@ namespace Solidify.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("PhoneNumberConfirmed")
@@ -225,54 +229,6 @@ namespace Solidify.Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-                });
-
-            modelBuilder.Entity("Solidify.Domain.Entities.Company", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("BankAccount")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CommericalLicense")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CommericalNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CompanyName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CompanyWebSite")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FaceBookAccout")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("InstagramAccount")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PaymentTerm")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<long>("TaxId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("TwitterAccount")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("companies");
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.Engineer", b =>
@@ -346,17 +302,6 @@ namespace Solidify.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Solidify.Domain.Entities.Company", b =>
-                {
-                    b.HasOne("Solidify.Domain.Entities.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.Engineer", b =>

@@ -10,9 +10,16 @@ namespace Solidify.Infrastructure.Persistance
         {
         }
         public DbSet<ApplicationUser> Users { get; set; }
+        public DbSet<Engineer> Engineers { get; set; }
+        public DbSet<Company> companies { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Engineer>()
+                .HasOne<Engineer>()
+                .WithOne()
+                .HasForeignKey<Engineer>(e => e.Id);
         }
     }
 }
