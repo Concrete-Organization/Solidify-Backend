@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Solidify.Application.Email.Services;
 using Solidify.Application.Email.Setting;
+using Solidify.Application.Files;
 using Solidify.Application.Jwt;
 using Solidify.Application.Jwt.Services;
 using Solidify.Application.Otp.Services;
@@ -48,6 +49,8 @@ namespace Solidify.Application.Extentions
             services.AddMemoryCache();
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IOtpService, OtpService>();
+
+            services.AddScoped<IFileService, FileService>(); 
         }
 
     }

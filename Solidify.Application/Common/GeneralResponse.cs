@@ -4,7 +4,7 @@ namespace Solidify.Application.Common
 {
     public static class GeneralResponse
     {
-        public static GeneralResponseDto CreateResponse(bool success, int statusCode, Object? Model, string? message)
+        public static GeneralResponseDto CreateResponse(bool success, int statusCode, object? Model, string? message)
         {
             return new GeneralResponseDto
             {
