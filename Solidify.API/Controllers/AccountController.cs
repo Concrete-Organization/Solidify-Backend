@@ -9,6 +9,8 @@ using Solidify.Application.Accounts.Commands.ResetPassword;
 using Solidify.Application.Accounts.Commands.SendOtp;
 using Solidify.Application.Accounts.Commands.VerifyOtp;
 using Solidify.Application.Common.Dtos;
+using Solidify.Application.Companies.Commands.Register;
+using Solidify.Application.Enginners.Commands.Register;
 
 namespace Solidify.API.Controllers
 {
@@ -25,8 +27,19 @@ namespace Solidify.API.Controllers
         }
 
 
-        [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] RegisterCommand command)
+        [HttpPost("registerUser")]
+        public async Task<IActionResult> Register([FromBody] RegisterUserCommand command)
+        {
+            return await HandleCommand(command);
+        }
+        [HttpPost("registerEngineer")]
+        public async Task<IActionResult> RegisterEnginner(RegisterEngineerCommand command)
+        {
+            return await HandleCommand(command);
+        }
+
+        [HttpPost("registerCompany")]
+        public async Task<IActionResult> RegisterCompany(RegisterCompanyCommand command)
         {
             return await HandleCommand(command);
         }
