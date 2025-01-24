@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Solidify.Application.Common.Dtos;
 using Solidify.Application.Files;
 using Solidify.Domain.Entities;
+using Solidify.Domain.Entities.ECommerce.Companies;
 using Solidify.Domain.Interfaces;
 using static Solidify.Application.Common.GeneralResponse;
 
@@ -39,7 +40,7 @@ namespace Solidify.Application.Companies.Commands.Register
 
             var company = new Company
             {   
-                Id = user.Id,
+                CompanyId = user.Id,
                 CompanyName = request.CompanyName,
                 BankAccount = request.BankAccount,
                 CompanyWebSite = request.CompanyWebSite,
