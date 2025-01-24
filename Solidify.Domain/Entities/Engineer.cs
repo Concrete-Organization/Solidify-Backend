@@ -8,7 +8,7 @@ namespace Solidify.Domain.Entities
     {
         [Key]
         [ForeignKey("User")]
-        public string Id { get; set; }
+        public string EngineerId { get; set; }
         public ApplicationUser User { get; set; }
         public string? Cv { get; set; } 
 
