@@ -1,13 +1,12 @@
 ﻿using System.Linq.Expressions;
-using Solidify.Domain.Interfaces.Specification;
 
-namespace Solidify.Application.Specifications
+namespace Solidify.Domain.Specification
 {
     public abstract class BaseSpecification<TEntity> : ISpecification<TEntity>
     {
         public BaseSpecification()
         {
-            
+
         }
 
         public BaseSpecification(Expression<Func<TEntity, bool>> criteria)
@@ -17,7 +16,7 @@ namespace Solidify.Application.Specifications
 
         public Expression<Func<TEntity, bool>>? Criteria { get; }
 
-        public List<Expression<Func<TEntity, object>>> Includes { get; private set; } = new ();
+        public List<Expression<Func<TEntity, object>>> Includes { get; private set; } = new();
 
         public Expression<Func<TEntity, object>>? SortAsc { get; private set; }
         public Expression<Func<TEntity, object>>? SortDesc { get; private set; }

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Solidify.Application.Specifications;
 using Solidify.Domain.Entities.ECommerce;
+using Solidify.Domain.Specification;
 
 namespace Solidify.Infrastructure
 {

@@ -1,6 +1,6 @@
 ﻿using System.Linq.Expressions;
 
-namespace Solidify.Domain.Interfaces.Specification
+namespace Solidify.Domain.Specification
 {
     public interface ISpecification<TEntity>
     {
