@@ -34,7 +34,7 @@ namespace Solidify.Infrastructure.Repositories
         }
 
 
-        public IQueryable<TEntity> HandleQuery(BaseSpecification<TEntity> specification)
+        private IQueryable<TEntity> HandleQuery(BaseSpecification<TEntity> specification)
         {
             var inputQuery = context.Set<TEntity>();
             return SpecificationsEvaluator<TEntity>.GetQuery(inputQuery, specification);
