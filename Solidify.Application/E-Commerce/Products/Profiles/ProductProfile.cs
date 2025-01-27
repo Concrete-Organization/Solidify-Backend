@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Solidify.Application.E_Commerce.Products.Commands.CreateProduct;
+using Solidify.Application.E_Commerce.Products.Dtos;
 using Solidify.Domain.Entities.ECommerce;
 
 namespace Solidify.Application.E_Commerce.Products.Profiles
@@ -9,6 +10,7 @@ namespace Solidify.Application.E_Commerce.Products.Profiles
         public ProductProfile()
         {
             CreateMap<CreateProductCommand, Product>();
+            CreateMap<Product, ProductDto>();
         }
     }
 }
