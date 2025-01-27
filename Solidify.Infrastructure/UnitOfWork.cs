@@ -5,8 +5,8 @@ using Solidify.Infrastructure.Repositories;
 
 namespace Solidify.Infrastructure;
 
-public class UnitOfWork<TEntity>(SolidifyDbContext context) 
-    : IUnitOfWork<TEntity> where TEntity : class
+public class UnitOfWork(SolidifyDbContext context) 
+    : IUnitOfWork
 {
     private readonly Hashtable _repositories = new();
     public async Task<int> Commit()
@@ -14,7 +14,7 @@ public class UnitOfWork<TEntity>(SolidifyDbContext context)
         return await context.SaveChangesAsync();
     }
 
-    public IGenericRepository<TEntity> GetRepository()
+    public IGenericRepository<TEntity> GetRepository<TEntity>() where TEntity : class
     {
         var type = nameof(TEntity);
 

@@ -1,7 +1,7 @@
 ﻿namespace Solidify.Domain.Interfaces;
 
-public interface IUnitOfWork<TEntity> where TEntity : class
+public interface IUnitOfWork
 {
     Task<int> Commit();
-    IGenericRepository<TEntity> GetRepository();
+    IGenericRepository<TEntity> GetRepository<TEntity>() where TEntity : class;
 }

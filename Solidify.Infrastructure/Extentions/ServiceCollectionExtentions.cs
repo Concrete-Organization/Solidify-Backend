@@ -37,6 +37,8 @@ namespace Solidify.Infrastructure.Extentions
 
             services.AddScoped<IEngineerRepository, EngineerRepository>();
             services.AddScoped<ICompanyRepository, CompanyRepository>();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
     }
 }
