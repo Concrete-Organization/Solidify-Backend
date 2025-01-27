@@ -17,8 +17,8 @@ namespace Solidify.Application.Extentions
     {
         public static void AddApplication(this IServiceCollection services, IConfiguration configuration)
         {
-
-            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+            var appAssembly = Assembly.GetExecutingAssembly();
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(appAssembly));
 
 
             services.Configure<JwtSettings>(configuration.GetSection("Jwt"));
@@ -44,6 +44,7 @@ namespace Solidify.Application.Extentions
                 };
             });
 
+            services.AddAutoMapper(appAssembly);
 
             services.Configure<SmtpSettings>(configuration.GetSection("SmtpSettings"));
             services.AddMemoryCache();
