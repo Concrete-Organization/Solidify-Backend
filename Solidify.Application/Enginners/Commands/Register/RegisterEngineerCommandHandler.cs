@@ -57,7 +57,7 @@ namespace Solidify.Application.Enginners.Commands.Register
 
             var engineer = new Engineer
             {
-                Id = user.Id,
+                EngineerId = user.Id,
                 Cv = cvUploadResult.Model.ToString(),
                 SyndicateCard = cardUploadResult.Model.ToString(),
             };
