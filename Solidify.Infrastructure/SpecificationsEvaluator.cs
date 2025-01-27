@@ -6,7 +6,7 @@ namespace Solidify.Infrastructure
 {
     public static class SpecificationsEvaluator<TEntity> where TEntity : class
     {
-        public static IQueryable<TEntity> GetQuery(IQueryable<TEntity> inputQuery, BaseSpecification<TEntity> spec)
+        public static IQueryable<TEntity> GetQuery(IQueryable<TEntity> inputQuery, ISpecification<TEntity> spec)
         {
             var query = inputQuery;
             
