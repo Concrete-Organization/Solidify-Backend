@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Solidify.Application.E_Commerce.Products.Commands.CreateProduct;
+using Solidify.Application.E_Commerce.Products.Queries.GetAllProducts;
 using Solidify.Application.E_Commerce.Products.Queries.GetProdocutById;
 
 namespace Solidify.API.Controllers
@@ -10,16 +11,22 @@ namespace Solidify.API.Controllers
     [ApiController]
     public class ProductController(IMediator mediator) : BaseController(mediator)
     {
-        [HttpPost]
-        public async Task<IActionResult> AddProduct(CreateProductCommand command)
+        [HttpGet]
+        public async Task<IActionResult> GetAllProducts([FromQuery]GetAllProductsQuery query)
         {
-            return await HandleCommand(command);
+            return await HandleCommand(query);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProductById(string id)
         {
             return await HandleCommand(new GetProductByIdQuery(id));
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddProduct(CreateProductCommand command)
+        {
+            return await HandleCommand(command);
         }
     }
 }
