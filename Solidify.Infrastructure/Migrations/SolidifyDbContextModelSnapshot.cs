@@ -272,7 +272,7 @@ namespace Solidify.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("companies");
+                    b.ToTable("companies", (string)null);
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.Engineer", b =>
@@ -294,7 +294,7 @@ namespace Solidify.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Engineers");
+                    b.ToTable("Engineers", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

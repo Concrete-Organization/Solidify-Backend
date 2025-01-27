@@ -13,7 +13,7 @@ namespace Solidify.Infrastructure.Repositories
     {
         public async Task AddCompany(Company company)
         {
-            await context.companies.AddAsync(company);
+             context.Companies.Add(company);
             await context.SaveChangesAsync();
         }
     }

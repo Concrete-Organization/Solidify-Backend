@@ -38,7 +38,7 @@ namespace Solidify.Application.Companies.Commands.Register
             }
 
             var company = new Company
-            {   
+            {
                 Id = user.Id,
                 CompanyName = request.CompanyName,
                 BankAccount = request.BankAccount,
