@@ -17,16 +17,8 @@ namespace Solidify.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
 
-    public class AccountController(IMediator mediator) : ControllerBase
+    public class AccountController(IMediator mediator) : BaseController(mediator)
     {
-
-        private async Task<IActionResult> HandleCommand<TCommand>(TCommand command) where TCommand : IRequest<GeneralResponseDto>
-        {
-            var result = await mediator.Send(command);
-            return StatusCode(result.StatusCode, result);
-        }
-
-
         [HttpPost("registerUser")]
         public async Task<IActionResult> Register([FromBody] RegisterUserCommand command)
         {
