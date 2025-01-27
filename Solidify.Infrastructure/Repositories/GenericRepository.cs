@@ -8,14 +8,16 @@ namespace Solidify.Infrastructure.Repositories
     public class GenericRepository<TEntity>(SolidifyDbContext context)
         : IGenericRepository<TEntity> where TEntity : class
     {
-        public async Task<IEnumerable<TEntity>> GetAllAsync(ISpecification<TEntity> specification)
+        public async Task<(IEnumerable<TEntity>, int)> GetAllAsync(ISpecification<TEntity> specification)
         {
-            return await HandleQuery(specification).ToListAsync();
+            var (result, count) =  HandleQuery(specification);
+            return (await result.ToListAsync(), count);
         }
 
         public async Task<TEntity> GetAsync(ISpecification<TEntity> specification)
         {
-            return await HandleQuery(specification).FirstOrDefaultAsync();
+            var (result, count) = HandleQuery(specification);
+            return await result.FirstOrDefaultAsync();
         }
 
         public async Task AddAsync(TEntity entity)
@@ -34,7 +36,7 @@ namespace Solidify.Infrastructure.Repositories
         }
 
 
-        private IQueryable<TEntity> HandleQuery(ISpecification<TEntity> specification)
+        private (IQueryable<TEntity>, int) HandleQuery(ISpecification<TEntity> specification)
         {
             var inputQuery = context.Set<TEntity>();
             return SpecificationsEvaluator<TEntity>.GetQuery(inputQuery, specification);
