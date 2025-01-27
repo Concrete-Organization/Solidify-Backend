@@ -27,8 +27,6 @@ namespace Solidify.Application.Enginners.Commands.Register
             {
                 UserName = request.UserName,
                 Email = request.Email,
-                PhoneNumber = request.PhoneNumber,
-                Address = request.Address,
                 
             };
 

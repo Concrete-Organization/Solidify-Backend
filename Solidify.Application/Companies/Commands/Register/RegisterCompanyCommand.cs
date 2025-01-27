@@ -16,17 +16,18 @@ namespace Solidify.Application.Companies.Commands.Register
         [MinLength(3)]
         [Required]
         public string CompanyName { get; set; }
+        [Required]
 
-     //   public string Address { get; set; }
+        public string CompanyAddress { get; set; }
+        [Required]
+
         public string CommericalNumber { get; set; }
+        [Required]
+
         public long TaxId { get; set; }
+        [Required]
+
         public IFormFile CommericalLicense { get; set; }
-        public string? CompanyWebSite { get; set; }
-        public string? FaceBookAccout { get; set; }
-        public string? InstagramAccount { get; set; }
-        public string? TwitterAccount { get; set; }
-        public string BankAccount { get; set; }
-        public string PaymentTerm { get; set; }
       //  public string UserName { get; set; }
       //  public string Email { get; set; }
      //   public string Password { get; set; }

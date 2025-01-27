@@ -15,8 +15,6 @@ public class RegisterUserCommandHandler(UserManager<ApplicationUser> userManager
         {
             UserName = request.UserName,
             Email = request.Email,
-            PhoneNumber = request.PhoneNumber,
-            Address = request.Address
 
         };
 
