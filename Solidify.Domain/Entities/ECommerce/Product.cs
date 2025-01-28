@@ -1,4 +1,5 @@
 ﻿using Solidify.Domain.Entities.ECommerce.Companies;
+using Solidify.Domain.Enums;
 
 namespace Solidify.Domain.Entities.ECommerce
 {
@@ -9,7 +10,7 @@ namespace Solidify.Domain.Entities.ECommerce
         public decimal Price { get; set; }
         public int Stock { get; set; }
         public string Description { get; set; }
-        public string Measurement { get; set; }
+        public MeasurementUnit Measurement { get; set; }
         public string ImageUri { get; set; }
         public int Rate { get; set; }
         public int CategoryId { get; set; }
