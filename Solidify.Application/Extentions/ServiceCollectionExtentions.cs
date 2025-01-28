@@ -1,13 +1,17 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Solidify.Application.E_Commerce.Products.Dtos;
+using Solidify.Application.E_Commerce.Products.Resolvers;
 using Solidify.Application.Email.Services;
 using Solidify.Application.Email.Setting;
 using Solidify.Application.Files;
 using Solidify.Application.Jwt;
 using Solidify.Application.Jwt.Services;
 using Solidify.Application.Otp.Services;
+using Solidify.Domain.Entities.ECommerce;
 using System.Reflection;
 using System.Text;
 
@@ -45,6 +49,7 @@ namespace Solidify.Application.Extentions
             });
 
             services.AddAutoMapper(appAssembly);
+            services.AddSingleton<IValueResolver<Product, ProductDto, string>, ImageUriResolver>();
 
             services.Configure<SmtpSettings>(configuration.GetSection("SmtpSettings"));
             services.AddMemoryCache();

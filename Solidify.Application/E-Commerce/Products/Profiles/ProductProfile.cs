@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Solidify.Application.E_Commerce.Products.Commands.CreateProduct;
 using Solidify.Application.E_Commerce.Products.Dtos;
 using Solidify.Application.E_Commerce.Products.Queries.GetAllProducts;
+using Solidify.Application.E_Commerce.Products.Resolvers;
 using Solidify.Domain.Entities.ECommerce;
 using Solidify.Domain.Specification.ProductSpecifications;
 
@@ -11,10 +13,14 @@ namespace Solidify.Application.E_Commerce.Products.Profiles
     {
         public ProductProfile()
         {
+            
             CreateMap<CreateProductCommand, Product>();
-            CreateMap<Product, ProductDto>();
+
+            CreateMap<Product, ProductDto>()
+                .ForMember(dest => dest.ImageUri,
+                    op => op.MapFrom<ImageUriResolver>());
+
             CreateMap<GetAllProductsQuery, ProductSpecificationParameters>();
-            CreateMap<IEnumerable<ProductDto>, IEnumerable<Product>>();
         }
     }
 }
