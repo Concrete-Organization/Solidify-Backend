@@ -4,6 +4,7 @@ using Solidify.Application.Common.Dtos;
 using Solidify.Application.Files;
 using Solidify.Domain.Entities;
 using Solidify.Domain.Entities.ECommerce.Companies;
+using Solidify.Domain.Enums;
 using Solidify.Domain.Interfaces;
 using static Solidify.Application.Common.GeneralResponse;
 
@@ -31,7 +32,7 @@ namespace Solidify.Application.Companies.Commands.Register
                 return CreateResponse(false, 400, result.Errors.Select(e => e.Description).ToList(), "Registration failed");
             }
 
-            var licenseUploadResult = await fileService.UploadFileAsync(request.CommericalLicense, "License");
+            var licenseUploadResult = await fileService.UploadFileAsync(request.CommericalLicense, FileType.License);
             if (!licenseUploadResult.IsSucceeded)
             {
                 await userManager.DeleteAsync(user);

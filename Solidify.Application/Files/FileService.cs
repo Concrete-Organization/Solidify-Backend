@@ -5,12 +5,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Solidify.Domain.Enums;
 
 namespace Solidify.Application.Files
 {
     public class FileService : IFileService
     {
-        public async Task<GeneralResponseDto> UploadFileAsync(IFormFile file,string fileType)
+        public async Task<GeneralResponseDto> UploadFileAsync(IFormFile file,FileType fileType)
         {
             //extentions
             List<string> validExtentions = new List<string>() { ".jpg", ".pdf", ".png" };
@@ -42,11 +43,12 @@ namespace Solidify.Application.Files
             //name changing
             string fileName = Guid.NewGuid().ToString() + extention;
 
-            string folderName = fileType.ToLower() switch
+            string folderName = fileType switch
             {
-                "cv" => "CVs",
-                "license" => "Licenses",
-                "syndicatecard" => "SyndicateCards",
+                FileType.CV => "CVs",
+                FileType.License => "Licenses",
+                FileType.SyndicateCard => "SyndicateCards",
+                FileType.ProductImage => "ProductImages",
                 _ => "Others"
             };
 

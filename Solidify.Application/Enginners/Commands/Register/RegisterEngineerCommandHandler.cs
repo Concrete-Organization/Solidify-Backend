@@ -13,6 +13,7 @@ using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using Solidify.Domain.Enums;
 
 namespace Solidify.Application.Enginners.Commands.Register
 {
@@ -40,14 +41,14 @@ namespace Solidify.Application.Enginners.Commands.Register
               
             }
 
-            var cvUploadResult = await fileService.UploadFileAsync(request.CV,"cv");
+            var cvUploadResult = await fileService.UploadFileAsync(request.CV, FileType.CV);
             if (!cvUploadResult.IsSucceeded)
             {
                 await userManager.DeleteAsync(user);
                 return cvUploadResult;
             }
 
-            var cardUploadResult = await fileService.UploadFileAsync(request.SyndicateCard, "SyndicateCard");
+            var cardUploadResult = await fileService.UploadFileAsync(request.SyndicateCard, FileType.SyndicateCard);
             if (!cardUploadResult.IsSucceeded)
             {
                 await userManager.DeleteAsync(user);
