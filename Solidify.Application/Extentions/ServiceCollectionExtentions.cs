@@ -14,6 +14,8 @@ using Solidify.Application.Otp.Services;
 using Solidify.Domain.Entities.ECommerce;
 using System.Reflection;
 using System.Text;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 
 namespace Solidify.Application.Extentions
 {
@@ -50,6 +52,9 @@ namespace Solidify.Application.Extentions
 
             services.AddAutoMapper(appAssembly);
             services.AddSingleton<IValueResolver<Product, ProductDto, string>, ImageUriResolver>();
+
+            services.AddValidatorsFromAssembly(appAssembly)
+                .AddFluentValidationAutoValidation();
 
             services.Configure<SmtpSettings>(configuration.GetSection("SmtpSettings"));
             services.AddMemoryCache();
