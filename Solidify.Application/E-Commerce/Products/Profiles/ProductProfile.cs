@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Solidify.Application.E_Commerce.Products.Commands.CreateProduct;
+using Solidify.Application.E_Commerce.Products.Commands.UpdateProduct;
 using Solidify.Application.E_Commerce.Products.Dtos;
 using Solidify.Application.E_Commerce.Products.Queries.GetAllProducts;
 using Solidify.Application.E_Commerce.Products.Resolvers;
@@ -21,6 +22,8 @@ namespace Solidify.Application.E_Commerce.Products.Profiles
                     op => op.MapFrom<ImageUriResolver>());
 
             CreateMap<GetAllProductsQuery, ProductSpecificationParameters>();
+
+            CreateMap<UpdateProductCommand, Product>();
         }
     }
 }
