@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Solidify.Application.E_Commerce.Products.Commands.CreateProduct;
+using Solidify.Application.E_Commerce.Products.Commands.DeleteProduct;
 using Solidify.Application.E_Commerce.Products.Queries.GetAllProducts;
 using Solidify.Application.E_Commerce.Products.Queries.GetProdocutById;
 
@@ -27,6 +28,14 @@ namespace Solidify.API.Controllers
         public async Task<IActionResult> AddProduct(CreateProductCommand command)
         {
             return await HandleCommand(command);
+        }
+
+
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteProduct(string id)
+        {
+            return await HandleCommand(new DeleteProductCommand(id));
         }
     }
 }
