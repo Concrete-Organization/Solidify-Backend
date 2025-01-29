@@ -1,4 +1,8 @@
-﻿using AutoMapper;
+﻿using System.Reflection;
+using System.Text;
+using AutoMapper;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,14 +16,10 @@ using Solidify.Application.Jwt;
 using Solidify.Application.Jwt.Services;
 using Solidify.Application.Otp.Services;
 using Solidify.Domain.Entities.ECommerce;
-using System.Reflection;
-using System.Text;
-using FluentValidation;
-using FluentValidation.AspNetCore;
 
-namespace Solidify.Application.Extentions
+namespace Solidify.Application.Extensions
 {
-    public static class ServiceCollectionExtentions
+    public static class ServiceCollectionExtensions
     {
         public static void AddApplication(this IServiceCollection services, IConfiguration configuration)
         {

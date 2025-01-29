@@ -10,7 +10,7 @@ public class ErrorHandlingMiddleware : IMiddleware
     {
         try
         {
-            next.Invoke(context);
+            await next.Invoke(context);
         }
         catch (NotFoundException notFound)
         {
