@@ -15,7 +15,9 @@ using Solidify.Application.Files;
 using Solidify.Application.Jwt;
 using Solidify.Application.Jwt.Services;
 using Solidify.Application.Otp.Services;
+using Solidify.Application.Services.Caching;
 using Solidify.Domain.Entities.ECommerce;
+using Solidify.Domain.Interfaces.Services.Cashing;
 
 namespace Solidify.Application.Extensions
 {
@@ -56,12 +58,22 @@ namespace Solidify.Application.Extensions
             services.AddValidatorsFromAssembly(appAssembly)
                 .AddFluentValidationAutoValidation();
 
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = configuration.GetConnectionString("RedisCS");
+            });
+
             services.Configure<SmtpSettings>(configuration.GetSection("SmtpSettings"));
+
             services.AddMemoryCache();
+            services.AddDistributedMemoryCache();
+
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IOtpService, OtpService>();
 
-            services.AddScoped<IFileService, FileService>(); 
+            services.AddScoped<IFileService, FileService>();
+
+            services.AddSingleton<ICacheService, CacheService>();
         }
 
     }
