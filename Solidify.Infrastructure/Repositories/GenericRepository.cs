@@ -10,13 +10,13 @@ namespace Solidify.Infrastructure.Repositories
     {
         public async Task<(IEnumerable<TEntity>, int)> GetAllAsync(ISpecification<TEntity> specification)
         {
-            var (result, count) =  HandleQuery(specification);
-            return (await result.ToListAsync(), count);
+            var result =  HandleQuery(specification);
+            return (await result.ToListAsync(), await HandleCount(specification));
         }
-
-        public async Task<TEntity> GetAsync(ISpecification<TEntity> specification)
+        
+        public async Task<TEntity?> GetAsync(ISpecification<TEntity> specification)
         {
-            var (result, count) = HandleQuery(specification);
+            var result = HandleQuery(specification);
             return await result.FirstOrDefaultAsync();
         }
 
@@ -36,10 +36,16 @@ namespace Solidify.Infrastructure.Repositories
         }
 
 
-        private (IQueryable<TEntity>, int) HandleQuery(ISpecification<TEntity> specification)
+        private IQueryable<TEntity> HandleQuery(ISpecification<TEntity> specification)
         {
             var inputQuery = context.Set<TEntity>();
             return SpecificationsEvaluator<TEntity>.GetQuery(inputQuery, specification);
+        }
+
+        private async Task<int> HandleCount(ISpecification<TEntity> specification)
+        {
+            var inputQuery = context.Set<TEntity>();
+            return await SpecificationsEvaluator<TEntity>.GetCount(inputQuery, specification);
         }
     }
 }
