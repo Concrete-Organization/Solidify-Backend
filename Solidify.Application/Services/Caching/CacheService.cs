@@ -61,7 +61,7 @@ namespace Solidify.Application.Services.Caching
         {
             var tasks =
                 CachedKeys.Keys
-                    .Where(k => k.Contains(prefixKey))
+                    .Where(k => k.Contains(prefixKey.ToLower()))
                     .Select(RemoveAsync);
 
             await Task.WhenAll(tasks);
@@ -77,7 +77,7 @@ namespace Solidify.Application.Services.Caching
                 cashedKey.Append($"|{key}-{value}");
             }
 
-            return cashedKey.ToString();
+            return cashedKey.ToString().ToLower();
         }
     }
 }
