@@ -4,10 +4,12 @@ using Microsoft.AspNetCore.Http;
 using Solidify.Application.Common;
 using Solidify.Application.Common.Dtos;
 using Solidify.Application.Files;
+using Solidify.Application.Services.Caching;
 using Solidify.Domain.Entities.ECommerce;
 using Solidify.Domain.Enums;
 using Solidify.Domain.Exceptions;
 using Solidify.Domain.Interfaces;
+using Solidify.Domain.Interfaces.Services.Cashing;
 using Solidify.Domain.Specification.ProductSpecifications;
 
 namespace Solidify.Application.E_Commerce.Products.Commands.UpdateProduct
@@ -15,7 +17,8 @@ namespace Solidify.Application.E_Commerce.Products.Commands.UpdateProduct
     public class UpdateProductCommandHandler(IUnitOfWork unitOfWork,
         IMapper mapper,
         IFileService fileService,
-        IHttpContextAccessor httpContextAccessor) : IRequestHandler<UpdateProductCommand, GeneralResponseDto>
+        IHttpContextAccessor httpContextAccessor,
+        ICacheService cacheService) : IRequestHandler<UpdateProductCommand, GeneralResponseDto>
     {
         public async Task<GeneralResponseDto> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
@@ -39,6 +42,8 @@ namespace Solidify.Application.E_Commerce.Products.Commands.UpdateProduct
 
             productRepository.Update(mapper.Map(request, product));
             await unitOfWork.Commit();
+
+            await cacheService.RemoveByPrefixAsync("product");
 
             var httpContext = httpContextAccessor.HttpContext;
             var baseUri = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";

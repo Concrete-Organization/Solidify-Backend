@@ -7,12 +7,14 @@ using Solidify.Domain.Entities.ECommerce;
 using Solidify.Domain.Enums;
 using Solidify.Domain.Exceptions;
 using Solidify.Domain.Interfaces;
+using Solidify.Domain.Interfaces.Services.Cashing;
 using Solidify.Domain.Specification.ProductSpecifications;
 
 namespace Solidify.Application.E_Commerce.Products.Commands.DeleteProduct
 {
     public class DeleteProductCommandHandler(IUnitOfWork unitOfWork,
-        IFileService fileService) : IRequestHandler<DeleteProductCommand, GeneralResponseDto>
+        IFileService fileService,
+        ICacheService cacheService) : IRequestHandler<DeleteProductCommand, GeneralResponseDto>
     {
         public async Task<GeneralResponseDto> Handle(DeleteProductCommand request, CancellationToken cancellationToken)
         {
@@ -28,6 +30,8 @@ namespace Solidify.Application.E_Commerce.Products.Commands.DeleteProduct
 
             productRepository.Delete(product);
             await unitOfWork.Commit();
+
+            await cacheService.RemoveByPrefixAsync("product");
 
             return GeneralResponse.CreateResponse(true, StatusCodes.Status200OK, null,
                 $"Product with id [{request.Id}] deleted successfully");
