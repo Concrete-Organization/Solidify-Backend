@@ -15,8 +15,8 @@ namespace Solidify.Application.E_Commerce.Carts.Queries.GetCart
     {
         public async Task<GeneralResponseDto> Handle(GetCartQuery request, CancellationToken cancellationToken)
         {
-            var cart = await cacheService.GetAsync<Cart>("cart", () => Task.FromResult(new Cart()));
-
+            var cart = await cacheService.GetAsync<Cart>("cart", () => Task.FromResult(new Cart()), TimeSpan.FromDays(15));
+            
             return GeneralResponse.CreateResponse(true, StatusCodes.Status200OK, mapper.Map<CartDto>(cart), "");
         }
     }

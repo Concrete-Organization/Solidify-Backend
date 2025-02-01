@@ -20,7 +20,7 @@ namespace Solidify.Application.Services.Caching
             return JsonSerializer.Deserialize<T>(value);
         }
 
-        public async Task<T> GetAsync<T>(string key, Func<Task<T>> factory) where T : class
+        public async Task<T> GetAsync<T>(string key, Func<Task<T>> factory, TimeSpan expireTime) where T : class
         {
             T? value = await GetAsync<T>(key);
 
@@ -29,23 +29,23 @@ namespace Solidify.Application.Services.Caching
 
             value = await factory();
 
-            await SetAsync(key, value);
+            await SetAsync(key, value, expireTime);
 
             return value;
         }
 
-        public async Task SetAsync<T>(string key, T value) where T : class
+        public async Task SetAsync<T>(string key, T value, TimeSpan expireTime) where T : class
         {
             if (value is null)
                 return;
 
-            CachedKeys.Add(key, true);
+            CachedKeys.TryAdd(key, true);
 
             var stringValue = JsonSerializer.Serialize(value);
 
             DistributedCacheEntryOptions options = new()
             {
-                AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(5)
+                SlidingExpiration = expireTime
             };
             await distributedCache.SetStringAsync(key, stringValue, options);
         }

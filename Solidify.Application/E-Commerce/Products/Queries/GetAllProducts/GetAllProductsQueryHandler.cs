@@ -32,7 +32,7 @@ namespace Solidify.Application.E_Commerce.Products.Queries.GetAllProducts
 
                 return new CacheResult<IEnumerable<ProductDto>>()
                     { Data = mapper.Map<IEnumerable<ProductDto>>(products), Count = count };
-            });
+            }, TimeSpan.FromDays(1));
 
             return GeneralResponse.CreateResponse(true, StatusCodes.Status200OK, new PagedResponse<ProductDto>(
                 cacheResult.Data, request.PageSize,
