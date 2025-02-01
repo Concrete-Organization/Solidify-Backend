@@ -36,7 +36,7 @@ namespace Solidify.Application.E_Commerce.CartItems.Commands.AddCartItem
 
             cart.GetTotalPrice();
 
-            if (product.Stock - existingCartItem.Quantity < 0)
+            if (existingCartItem is not null && product.Stock - existingCartItem.Quantity < 0)
                 return GeneralResponse.CreateResponse(false, StatusCodes.Status405MethodNotAllowed, null,
                     $"{product.Name} out of stock");
 

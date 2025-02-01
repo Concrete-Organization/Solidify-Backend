@@ -16,7 +16,7 @@ public class UnitOfWork(SolidifyDbContext context)
 
     public IGenericRepository<TEntity> GetRepository<TEntity>() where TEntity : class
     {
-        var type = nameof(TEntity);
+        var type = typeof(TEntity).Name;
 
         if (!_repositories.Contains(type))
         {
