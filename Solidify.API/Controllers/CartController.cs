@@ -4,7 +4,6 @@ using Solidify.Application.E_Commerce.Carts.Queries.GetCart;
 
 namespace Solidify.API.Controllers
 {
-    [Route("api/[controller]")]
     public class CartController(IMediator mediator) : BaseController(mediator)
     {
         [HttpGet]

@@ -24,6 +24,11 @@ namespace Solidify.Infrastructure.Repositories
         {
             await context.AddAsync(entity);
         }
+        
+        public async Task AddRangeAsync(IEnumerable<TEntity> entities)
+        {
+            await context.AddRangeAsync(entities);
+        }
 
         public void Update(TEntity entity)
         {

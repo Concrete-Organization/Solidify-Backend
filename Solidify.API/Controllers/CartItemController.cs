@@ -7,7 +7,6 @@ using Solidify.Application.E_Commerce.CartItems.Commands.IncrementCartItem;
 
 namespace Solidify.API.Controllers
 {
-    [Route("api/[controller]")]
     public class CartItemController(IMediator mediator) : BaseController(mediator)
     {
         [HttpPost("{id}")]
