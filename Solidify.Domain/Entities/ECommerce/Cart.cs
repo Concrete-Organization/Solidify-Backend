@@ -10,6 +10,7 @@ namespace Solidify.Domain.Entities.ECommerce
 
         public void GetTotalPrice()
         {
+            this.TotalPrice = 0;
             foreach (CartItem item in this.Items!)
             {
                 this.TotalPrice += (item.Price * item.Quantity);
