@@ -10,8 +10,6 @@ using Solidify.Application.E_Commerce.Products.Queries.GetProdocutById;
 
 namespace Solidify.API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
     public class ProductController(IMediator mediator) : BaseController(mediator)
     {
         [HttpGet]
