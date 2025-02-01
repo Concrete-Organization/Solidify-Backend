@@ -18,6 +18,8 @@ public class DecrementCartItemCommandHandler(ICacheService cacheService) : IRequ
                                ?? throw new NotFoundException(nameof(CartItem), request.Id);
 
         existingCartItem.DecrementQuantity();
+        if (existingCartItem.Quantity < 1)
+            cart.Items.Remove(existingCartItem);
 
         cart.GetTotalPrice();
 

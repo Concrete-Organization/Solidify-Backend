@@ -24,20 +24,26 @@ namespace Solidify.Application.E_Commerce.CartItems.Commands.AddCartItem
             var product = await productRepository.GetAsync(new ProductsSpecification(request.Id))
                           ?? throw new NotFoundException(nameof(Product), request.Id);
 
-            if (cart.Items!.FirstOrDefault(i => i.Id == request.Id) is null)
+            var existingCartItem = cart.Items.FirstOrDefault(i => i.Id == request.Id);
+
+            if (existingCartItem is null)
             {
                 var cartItem = mapper.Map<CartItem>(product);
                 cart.Items!.Add(cartItem);
             }
             else
-                cart.Items!.FirstOrDefault(i => i.Id == request.Id).IncrementQuantity();
+                existingCartItem.IncrementQuantity();
 
             cart.GetTotalPrice();
+
+            if (product.Stock - existingCartItem.Quantity < 0)
+                return GeneralResponse.CreateResponse(false, StatusCodes.Status405MethodNotAllowed, null,
+                    $"{product.Name} out of stock");
 
             await cacheService.SetAsync("cart", cart, TimeSpan.FromDays(15));
 
             return GeneralResponse.CreateResponse(true, StatusCodes.Status200OK, null,
-                "Added to cart Successfully");
+                $"{product.Name} Added to cart Successfully");
         }
     }
 }
