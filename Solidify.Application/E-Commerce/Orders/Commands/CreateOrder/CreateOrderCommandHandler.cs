@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
 using Solidify.Application.Common;
 using Solidify.Application.Common.Dtos;
+using Solidify.Application.Common.User;
 using Solidify.Domain.Entities.ECommerce;
 using Solidify.Domain.Interfaces;
 using Solidify.Domain.Interfaces.Services.Cashing;
@@ -12,7 +13,8 @@ namespace Solidify.Application.E_Commerce.Orders.Commands.CreateOrder
 {
     public class CreateOrderCommandHandler(IUnitOfWork unitOfWork,
         ICacheService cacheService,
-        IMapper mapper) : IRequestHandler<CreateOrderCommand, GeneralResponseDto>
+        IMapper mapper,
+        ICurrentUser user) : IRequestHandler<CreateOrderCommand, GeneralResponseDto>
     {
         public async Task<GeneralResponseDto> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
@@ -29,7 +31,7 @@ namespace Solidify.Application.E_Commerce.Orders.Commands.CreateOrder
             var order = new Order()
             {
                 Id = Guid.NewGuid().ToString(),
-                UserId = request.UserId,
+                UserId = user.GetUserId(),
                 TotalPrice = cart.TotalPrice
             };
 

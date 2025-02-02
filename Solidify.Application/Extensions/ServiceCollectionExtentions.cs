@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Solidify.Application.Common.User;
 using Solidify.Application.E_Commerce.Products.Dtos;
 using Solidify.Application.E_Commerce.Products.Resolvers;
 using Solidify.Application.Email.Services;
@@ -74,6 +75,8 @@ namespace Solidify.Application.Extensions
             services.AddScoped<IFileService, FileService>();
 
             services.AddSingleton<ICacheService, CacheService>();
+
+            services.AddScoped<ICurrentUser, CurrentUser>();
         }
 
     }
