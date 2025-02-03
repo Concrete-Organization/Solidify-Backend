@@ -14,6 +14,7 @@ public static class WebApplicationExtension
         //}
 
         app.UseMiddleware<ErrorHandlingMiddleware>();
+        app.UseMiddleware<UnauthorizedMiddleware>();
 
         app.UseStaticFiles();
         app.UseHttpsRedirection();
