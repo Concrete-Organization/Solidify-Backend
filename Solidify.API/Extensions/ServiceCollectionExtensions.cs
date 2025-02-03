@@ -1,5 +1,11 @@
-﻿using Microsoft.OpenApi.Models;
+﻿using System.Reflection;
+using System.Runtime.InteropServices.JavaScript;
+using System.Text.Json;
+using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.OpenApi.Models;
 using Solidify.API.Middlewares;
+using Solidify.Application.Common;
 
 namespace Solidify.API.Extensions;
 
@@ -8,11 +14,35 @@ public static class ServiceCollectionExtensions
     public static void AddPresentation(this IServiceCollection services)
     {
         services.AddControllers();
+        
+        services.ConfigureModelStateErrors();
 
         services.AddSwagger();
 
         services.AddServices();
 
+
+    }
+
+    private static void ConfigureModelStateErrors(this IServiceCollection services)
+    {
+        services.Configure<ApiBehaviorOptions>(options =>
+        {
+            options.InvalidModelStateResponseFactory = context =>
+            {
+                var errors = context.ModelState
+                    .Where(e => e.Value.Errors.Count > 0)
+                    .SelectMany(x => x.Value.Errors)
+                    .Select(x => x.ErrorMessage).ToList();
+
+                var result = GeneralResponse.CreateResponse(false,
+                    StatusCodes.Status400BadRequest, errors,
+                    "validation errors occurred. Please check the provided data and try again."
+                );
+
+                return new BadRequestObjectResult(result);
+            };
+        });
     }
 
     private static void AddSwagger(this IServiceCollection services)
