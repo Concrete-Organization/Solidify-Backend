@@ -20,8 +20,9 @@ public class ErrorHandlingMiddleware : IMiddleware
         }
         catch (Exception e)
         {
-            Console.WriteLine(e);
-            throw;
+            context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+            await context.Response.WriteAsJsonAsync(GeneralResponse.CreateResponse(false, StatusCodes.Status500InternalServerError,
+                null, "Something went wrong"));
         }
     }
 }

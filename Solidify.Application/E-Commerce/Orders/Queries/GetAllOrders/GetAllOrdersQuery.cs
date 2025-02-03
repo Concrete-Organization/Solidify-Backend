@@ -5,6 +5,6 @@ namespace Solidify.Application.E_Commerce.Orders.Queries.GetAllOrders
 {
     public class GetAllOrdersQuery : PaginatedQuery
     {
-        public bool ActiveOrders { get; set; }
+        public bool ActiveOrders { get; set; } = true;
     }
 }

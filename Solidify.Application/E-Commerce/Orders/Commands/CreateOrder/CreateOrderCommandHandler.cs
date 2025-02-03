@@ -14,11 +14,12 @@ namespace Solidify.Application.E_Commerce.Orders.Commands.CreateOrder
     public class CreateOrderCommandHandler(IUnitOfWork unitOfWork,
         ICacheService cacheService,
         IMapper mapper,
-        ICurrentUser user) : IRequestHandler<CreateOrderCommand, GeneralResponseDto>
+        ICurrentUser currentUser) : IRequestHandler<CreateOrderCommand, GeneralResponseDto>
     {
         public async Task<GeneralResponseDto> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
-            var cart = await cacheService.GetAsync<Cart>("cart", () => Task.FromResult(new Cart()),
+            var userId = currentUser.GetUserId();
+            var cart = await cacheService.GetAsync<Cart>($"cart_{userId}", () => Task.FromResult(new Cart()),
                 TimeSpan.FromDays(15));
 
             if (cart.Items.IsNullOrEmpty())
@@ -31,7 +32,7 @@ namespace Solidify.Application.E_Commerce.Orders.Commands.CreateOrder
             var order = new Order()
             {
                 Id = Guid.NewGuid().ToString(),
-                UserId = user.GetUserId(),
+                UserId = userId,
                 TotalPrice = cart.TotalPrice
             };
 
@@ -39,6 +40,7 @@ namespace Solidify.Application.E_Commerce.Orders.Commands.CreateOrder
 
             var orderItems = mapper.Map<IEnumerable<OrderItem>>(cart.Items).Select(o =>
             {
+                o.Id = Guid.NewGuid().ToString();
                 o.OrderId = order.Id;
                 return o;
             });
@@ -47,7 +49,9 @@ namespace Solidify.Application.E_Commerce.Orders.Commands.CreateOrder
 
             await unitOfWork.Commit();
 
-            return GeneralResponse.CreateResponse(true, StatusCodes.Status200OK, null,
+            await cacheService.RemoveAsync($"cart_{userId}");
+
+            return GeneralResponse.CreateResponse(true, StatusCodes.Status204NoContent, null,
                 $"Order #[{order.Id}] Created successfully");
         }
     }

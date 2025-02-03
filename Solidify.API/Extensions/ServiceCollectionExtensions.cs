@@ -57,5 +57,6 @@ public static class ServiceCollectionExtensions
     private static void AddServices(this IServiceCollection services)
     {
         services.AddScoped<ErrorHandlingMiddleware>();
+        services.AddScoped<UnauthorizedMiddleware>();
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Solidify.Application.Common;
 using Solidify.Application.Common.Dtos;
+using Solidify.Application.Common.User;
 using Solidify.Domain.Entities.ECommerce;
 using Solidify.Domain.Exceptions;
 using Solidify.Domain.Interfaces;
@@ -11,16 +12,19 @@ using Solidify.Domain.Specification.ProductSpecifications;
 namespace Solidify.Application.E_Commerce.CartItems.Commands.IncrementCartItem;
 
 public class IncrementCartItemCommandHandler(ICacheService cacheService,
-    IUnitOfWork unitOfWork) : IRequestHandler<IncrementCartItemCommand, GeneralResponseDto>
+    IUnitOfWork unitOfWork,
+    ICurrentUser currentUser) : IRequestHandler<IncrementCartItemCommand, GeneralResponseDto>
 {
     public async Task<GeneralResponseDto> Handle(IncrementCartItemCommand request, CancellationToken cancellationToken)
     {
+        var userId = currentUser.GetUserId();
+
         var productRepository = unitOfWork.GetRepository<Product>();
 
         var product = await productRepository.GetAsync(new ProductsSpecification(request.Id))
                       ?? throw new NotFoundException(nameof(Product), request.Id);
 
-        var cart = await cacheService.GetAsync<Cart>("cart");
+        var cart = await cacheService.GetAsync<Cart>($"cart_{userId}");
 
         var existingCartItem = cart.Items.FirstOrDefault(i => i.Id == request.Id)
                                ?? throw new NotFoundException(nameof(CartItem), request.Id);
@@ -33,7 +37,7 @@ public class IncrementCartItemCommandHandler(ICacheService cacheService,
             return GeneralResponse.CreateResponse(false, StatusCodes.Status405MethodNotAllowed, null,
                 $"{product.Name} there is no more than {existingCartItem.Quantity} in stock");
 
-        await cacheService.SetAsync("cart", cart, TimeSpan.FromDays(15));
+        await cacheService.SetAsync($"cart_{userId}", cart, TimeSpan.FromDays(15));
 
         return GeneralResponse.CreateResponse(true, StatusCodes.Status200OK, null,
             $"{existingCartItem.Name} incremented Successfully");
