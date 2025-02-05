@@ -33,13 +33,13 @@ namespace Solidify.API.Controllers
             return await HandleCommand(command);
         }
         [HttpPost("registerEngineer")]
-        public async Task<IActionResult> RegisterEnginner(RegisterEngineerCommand command)
+        public async Task<IActionResult> RegisterEnginner([FromForm] RegisterEngineerCommand command)
         {
             return await HandleCommand(command);
         }
 
         [HttpPost("registerCompany")]
-        public async Task<IActionResult> RegisterCompany(RegisterCompanyCommand command)
+        public async Task<IActionResult> RegisterCompany([FromForm] RegisterCompanyCommand command)
         {
             return await HandleCommand(command);
         }

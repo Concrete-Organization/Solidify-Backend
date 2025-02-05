@@ -10,7 +10,7 @@ namespace Solidify.Domain.Entities.ECommerce
         public int Stock { get; set; }
         public string Description { get; set; }
         public string Measurement { get; set; }
-        public string Image { get; set; }
+        public string ImageUri { get; set; }
         public int Rate { get; set; }
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
