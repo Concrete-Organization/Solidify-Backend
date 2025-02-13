@@ -26,8 +26,7 @@ namespace Solidify.Application.Enginners.Commands.Register
             var user = new ApplicationUser
             {
                 UserName = request.UserName,
-                Email = request.Email,
-                
+                Email = request.Email
             };
             
             var result = await userManager.CreateAsync(user, request.Password);

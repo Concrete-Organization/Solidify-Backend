@@ -360,5 +360,7 @@ MigrationBackup/
 .ionide/
 
 # Fody - auto-generated XML schema
-
+FodyWeavers.xsd
+/Solidify.API/wwwroot/Uploads/ProductsImage
 /Solidify.API/wwwroot/Uploads/ProductImages
+/Solidify.API/wwwroot/Uploads/Licenses
