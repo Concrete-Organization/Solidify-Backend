@@ -6,15 +6,10 @@ using Solidify.Domain.Entities;
 using Solidify.Domain.Interfaces;
 using Solidify.Infrastructure.Persistance;
 using Solidify.Infrastructure.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Solidify.Infrastructure.Extentions
+namespace Solidify.Infrastructure.Extensions
 {
-    public static class ServiceCollectionExtentions
+    public static class ServiceCollectionExtensions
     {
         public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {

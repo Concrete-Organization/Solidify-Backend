@@ -1,24 +1,33 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using System.Reflection;
+using System.Text;
+using AutoMapper;
+using FluentValidation;
+using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
+using Solidify.Application.Common.User;
+using Solidify.Application.E_Commerce.Products.Dtos;
+using Solidify.Application.E_Commerce.Products.Resolvers;
 using Solidify.Application.Email.Services;
 using Solidify.Application.Email.Setting;
 using Solidify.Application.Files;
 using Solidify.Application.Jwt;
 using Solidify.Application.Jwt.Services;
 using Solidify.Application.Otp.Services;
-using System.Reflection;
-using System.Text;
+using Solidify.Application.Services.Caching;
+using Solidify.Domain.Entities.ECommerce;
+using Solidify.Domain.Interfaces.Services.Cashing;
 
-namespace Solidify.Application.Extentions
+namespace Solidify.Application.Extensions
 {
-    public static class ServiceCollectionExtentions
+    public static class ServiceCollectionExtensions
     {
         public static void AddApplication(this IServiceCollection services, IConfiguration configuration)
         {
-
-            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+            var appAssembly = Assembly.GetExecutingAssembly();
+            services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(appAssembly));
 
 
             services.Configure<JwtSettings>(configuration.GetSection("Jwt"));
@@ -44,13 +53,30 @@ namespace Solidify.Application.Extentions
                 };
             });
 
+            services.AddAutoMapper(appAssembly);
+            services.AddSingleton<IValueResolver<Product, ProductDto, string>, ImageUriResolver>();
+
+            services.AddValidatorsFromAssembly(appAssembly)
+                .AddFluentValidationAutoValidation();
+
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = configuration.GetConnectionString("RedisCS");
+            });
 
             services.Configure<SmtpSettings>(configuration.GetSection("SmtpSettings"));
+
             services.AddMemoryCache();
+            services.AddDistributedMemoryCache();
+
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IOtpService, OtpService>();
 
-            services.AddScoped<IFileService, FileService>(); 
+            services.AddScoped<IFileService, FileService>();
+
+            services.AddSingleton<ICacheService, CacheService>();
+
+            services.AddScoped<ICurrentUser, CurrentUser>();
         }
 
     }

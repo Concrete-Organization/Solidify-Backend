@@ -13,23 +13,22 @@ using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using Solidify.Domain.Enums;
 
 namespace Solidify.Application.Enginners.Commands.Register
 {
     public class RegisterEngineerCommandHandler(UserManager<ApplicationUser> userManager,
         SignInManager<ApplicationUser> signInManager
-        , IEngineerRepository engineerRepository
-        ,IFileService fileService) : IRequestHandler<RegisterEngineerCommand, GeneralResponseDto>
+        , IEngineerRepository engineerRepository) : IRequestHandler<RegisterEngineerCommand, GeneralResponseDto>
     {
         public async Task<GeneralResponseDto> Handle(RegisterEngineerCommand request, CancellationToken cancellationToken)
         {
             var user = new ApplicationUser
             {
                 UserName = request.UserName,
-                Email = request.Email,
-                
+                Email = request.Email
             };
-
+            
             var result = await userManager.CreateAsync(user, request.Password);
 
             if (!result.Succeeded)
@@ -38,26 +37,10 @@ namespace Solidify.Application.Enginners.Commands.Register
               
             }
 
-            var cvUploadResult = await fileService.UploadFileAsync(request.CV,"cv");
-            if (!cvUploadResult.IsSucceeded)
-            {
-                await userManager.DeleteAsync(user);
-                return cvUploadResult;
-            }
-
-            var cardUploadResult = await fileService.UploadFileAsync(request.SyndicateCard, "SyndicateCard");
-            if (!cardUploadResult.IsSucceeded)
-            {
-                await userManager.DeleteAsync(user);
-                return cardUploadResult;
-            }
-
-
+          
             var engineer = new Engineer
             {
-                EngineerId = user.Id,
-                Cv = cvUploadResult.Model.ToString(),
-                SyndicateCard = cardUploadResult.Model.ToString(),
+                EngineerId = user.Id
             };
 
             //we must save changes to engineer table ????????????

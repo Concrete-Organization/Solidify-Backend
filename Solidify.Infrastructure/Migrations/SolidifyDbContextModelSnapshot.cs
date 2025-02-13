@@ -241,55 +241,7 @@ namespace Solidify.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brands");
-                });
-
-            modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.Cart", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<decimal>("TotalPrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
-
-                    b.ToTable("Carts");
-                });
-
-            modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.CartItem", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("CartId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("ProductId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CartId");
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("CartItems");
+                    b.ToTable("Brands", (string)null);
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.Category", b =>
@@ -306,7 +258,7 @@ namespace Solidify.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.Companies.Company", b =>
@@ -318,6 +270,7 @@ namespace Solidify.Infrastructure.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("BankAccount")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CommericalLicense")
@@ -325,9 +278,6 @@ namespace Solidify.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CommericalNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CompanyAddress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -348,6 +298,7 @@ namespace Solidify.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PaymentTerm")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Status")
@@ -363,7 +314,7 @@ namespace Solidify.Infrastructure.Migrations
 
                     b.HasIndex("AdminId");
 
-                    b.ToTable("Companies");
+                    b.ToTable("Companies", (string)null);
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.Companies.CompanySales", b =>
@@ -394,7 +345,7 @@ namespace Solidify.Infrastructure.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("CompanySales");
+                    b.ToTable("CompanySales", (string)null);
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.FavoriteProduct", b =>
@@ -416,7 +367,7 @@ namespace Solidify.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("FavoriteProducts");
+                    b.ToTable("FavoriteProducts", (string)null);
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.Order", b =>
@@ -441,7 +392,7 @@ namespace Solidify.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.OrderItem", b =>
@@ -469,7 +420,7 @@ namespace Solidify.Infrastructure.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderItems");
+                    b.ToTable("OrderItems", (string)null);
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.OrderPayment", b =>
@@ -494,7 +445,7 @@ namespace Solidify.Infrastructure.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderPayments");
+                    b.ToTable("OrderPayments", (string)null);
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.Product", b =>
@@ -516,13 +467,12 @@ namespace Solidify.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Image")
+                    b.Property<string>("ImageUri")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Measurement")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Measurement")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -545,7 +495,7 @@ namespace Solidify.Infrastructure.Migrations
 
                     b.HasIndex("CompanyId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.ProductReview", b =>
@@ -574,7 +524,29 @@ namespace Solidify.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ProductReviews");
+                    b.ToTable("ProductReviews", (string)null);
+                });
+
+            modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.ShippingAddress", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PostalCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Street")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ShippingAddress", (string)null);
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.ShippingDetails", b =>
@@ -584,6 +556,9 @@ namespace Solidify.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AddressId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Carrier")
                         .IsRequired()
@@ -598,9 +573,11 @@ namespace Solidify.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AddressId");
+
                     b.HasIndex("OrderId");
 
-                    b.ToTable("ShippingDetails");
+                    b.ToTable("ShippingDetails", (string)null);
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.Engineer", b =>
@@ -622,7 +599,7 @@ namespace Solidify.Infrastructure.Migrations
 
                     b.HasKey("EngineerId");
 
-                    b.ToTable("Engineers");
+                    b.ToTable("Engineers", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -674,36 +651,6 @@ namespace Solidify.Infrastructure.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.Cart", b =>
-                {
-                    b.HasOne("Solidify.Domain.Entities.ApplicationUser", "User")
-                        .WithOne("Cart")
-                        .HasForeignKey("Solidify.Domain.Entities.ECommerce.Cart", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
-            modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.CartItem", b =>
-                {
-                    b.HasOne("Solidify.Domain.Entities.ECommerce.Cart", "Cart")
-                        .WithMany("Items")
-                        .HasForeignKey("CartId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Solidify.Domain.Entities.ECommerce.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cart");
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.Companies.Company", b =>
@@ -850,6 +797,12 @@ namespace Solidify.Infrastructure.Migrations
 
             modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.ShippingDetails", b =>
                 {
+                    b.HasOne("Solidify.Domain.Entities.ECommerce.ShippingAddress", "ShippingAddress")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Solidify.Domain.Entities.ECommerce.Order", "Order")
                         .WithMany("ShippingDetails")
                         .HasForeignKey("OrderId")
@@ -857,6 +810,8 @@ namespace Solidify.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Order");
+
+                    b.Navigation("ShippingAddress");
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.Engineer", b =>
@@ -872,20 +827,12 @@ namespace Solidify.Infrastructure.Migrations
 
             modelBuilder.Entity("Solidify.Domain.Entities.ApplicationUser", b =>
                 {
-                    b.Navigation("Cart")
-                        .IsRequired();
-
                     b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.Brand", b =>
                 {
                     b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.Cart", b =>
-                {
-                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.Category", b =>

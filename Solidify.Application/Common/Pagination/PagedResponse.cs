@@ -7,7 +7,7 @@ public class PagedResponse<TResponse>
         Items = items;
         ItemsCount = itemsCount;
         ItemsFrom = (pageNumber - 1) * pageSize + 1;
-        ItemsTo = pageNumber * pageSize;
+        ItemsTo = ItemsFrom + pageSize - 1;
         TotalPages = (int)Math.Ceiling(itemsCount / (decimal)pageSize);
     }
     public IEnumerable<TResponse> Items { get; set; }
