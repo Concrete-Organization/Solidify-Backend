@@ -270,7 +270,6 @@ namespace Solidify.Infrastructure.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("BankAccount")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CommericalLicense")
@@ -278,6 +277,9 @@ namespace Solidify.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CommericalNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompanyAddress")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -298,7 +300,6 @@ namespace Solidify.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PaymentTerm")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Status")
@@ -314,7 +315,6 @@ namespace Solidify.Infrastructure.Migrations
 
                     b.HasIndex("AdminId");
 
-                    b.ToTable("Companies", (string)null);
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.Companies.CompanySales", b =>

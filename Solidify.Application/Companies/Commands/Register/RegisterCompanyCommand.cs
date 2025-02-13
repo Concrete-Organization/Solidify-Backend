@@ -16,16 +16,18 @@ namespace Solidify.Application.Companies.Commands.Register
         [MinLength(3)]
         [Required]
         public string CompanyName { get; set; }
-
         [Required]
-        [MaxLength(250)]
-        public string? Address { get; set; }
 
-        //   public string Address { get; set; }
+        public string CompanyAddress { get; set; }
+        [Required]
+
         public string CommericalNumber { get; set; }
-        public long TaxId { get; set; }
-        public IFormFile CommericalLicense { get; set; }
+        [Required]
 
+        public long TaxId { get; set; }
+        [Required]
+
+        public IFormFile CommericalLicense { get; set; }
       //  public string UserName { get; set; }
       //  public string Email { get; set; }
      //   public string Password { get; set; }

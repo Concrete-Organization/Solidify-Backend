@@ -22,7 +22,7 @@ namespace Solidify.Application.Companies.Commands.Register
             {
                 UserName = request.UserName,
                 Email = request.Email,
-                Address = request.Address,
+                Address = request.CompanyAddress,
             };
             var result = await userManager.CreateAsync(user, request.Password);
 
