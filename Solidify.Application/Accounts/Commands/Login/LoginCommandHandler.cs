@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Solidify.Application.Accounts.Commands.Login.Dto;
 using Solidify.Application.Common.Dtos;
 using Solidify.Application.Jwt.Services;
 using Solidify.Domain.Entities;
@@ -42,7 +43,7 @@ public class LoginCommandHandler(UserManager<ApplicationUser> userManager
         {
             IsSucceeded = true,
             Message = "Login successful",
-            Model = token,
+            Model = new LoginResponseDto(){Token = token.Token, Roles = roles, ExpireDate = token.ExpireDate},
             StatusCode = 200
         };
     }

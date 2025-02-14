@@ -46,7 +46,7 @@ namespace Solidify.Application.Enginners.Commands.Register
             //we must save changes to engineer table ????????????
             await engineerRepository.AddEngineerAsync(engineer);
 
-            await userManager.AddToRoleAsync(user, "User");
+            await userManager.AddToRoleAsync(user, "Engineer");
             await signInManager.SignInAsync(user, isPersistent: false);
 
 
