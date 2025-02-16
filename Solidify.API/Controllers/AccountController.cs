@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Metadata;
 using Microsoft.AspNetCore.Mvc;
 using Solidify.Application.Accounts.Commands.Login;
+using Solidify.Application.Accounts.Commands.RefreshToken;
 using Solidify.Application.Accounts.Commands.Register;
 using Solidify.Application.Accounts.Commands.ResetPassword;
+using Solidify.Application.Accounts.Commands.RevokeToken;
 using Solidify.Application.Accounts.Commands.SendOtp;
 using Solidify.Application.Accounts.Commands.VerifyOtp;
 using Solidify.Application.Common.Dtos;
@@ -36,6 +38,18 @@ namespace Solidify.API.Controllers
         {
             return await HandleCommand(command);
 
+        }
+        
+        [HttpPost("refreshToken")]
+        public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenCommand command)
+        {
+            return await HandleCommand(command);
+        }
+
+        [HttpDelete("revokeToken")]
+        public async Task<IActionResult> RevokeToken([FromBody] RevokeTokenCommand command)
+        {
+            return await HandleCommand(command);
         }
 
         [HttpPost("forgot-password")]

@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
-using Solidify.Application.Accounts.Commands.Login.Dto;
 using Solidify.Application.Common.Dtos;
 using Solidify.Application.Jwt.Services;
 using Solidify.Domain.Entities;
@@ -36,14 +35,13 @@ public class LoginCommandHandler(UserManager<ApplicationUser> userManager
             };
         }
 
-        var roles = await userManager.GetRolesAsync(user);
-        var token = jwtService.GenerateToken(user, roles);
+        var authResponse = await jwtService.GenerateToken(user);
 
         return new GeneralResponseDto
         {
             IsSucceeded = true,
             Message = "Login successful",
-            Model = new LoginResponseDto(){Token = token.Token, Roles = roles, ExpireDate = token.ExpireDate},
+            Model = authResponse,
             StatusCode = 200
         };
     }
