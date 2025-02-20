@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Solidify.Infrastructure.Persistance;
 
@@ -11,9 +12,11 @@ using Solidify.Infrastructure.Persistance;
 namespace Solidify.Infrastructure.Migrations
 {
     [DbContext(typeof(SolidifyDbContext))]
-    partial class SolidifyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250216003220_AddRefreshTokenTable")]
+    partial class AddRefreshTokenTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -360,9 +363,6 @@ namespace Solidify.Infrastructure.Migrations
                     b.Property<int>("OrderStatus")
                         .HasColumnType("int");
 
-                    b.Property<int>("ShippingAddressId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
 
@@ -371,8 +371,6 @@ namespace Solidify.Infrastructure.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ShippingAddressId");
 
                     b.HasIndex("UserId");
 
@@ -383,10 +381,6 @@ namespace Solidify.Infrastructure.Migrations
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OrderId")
                         .IsRequired()
@@ -524,20 +518,48 @@ namespace Solidify.Infrastructure.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("City")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PostalCode")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Street")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("ShippingAddresses");
+                    b.ToTable("ShippingAddress");
+                });
+
+            modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.ShippingDetails", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AddressId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Carrier")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OrderId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("ShippingDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AddressId");
+
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("ShippingDetails");
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.Engineer", b =>
@@ -707,19 +729,11 @@ namespace Solidify.Infrastructure.Migrations
 
             modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.Order", b =>
                 {
-                    b.HasOne("Solidify.Domain.Entities.ECommerce.ShippingAddress", "ShippingAddress")
-                        .WithMany()
-                        .HasForeignKey("ShippingAddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Solidify.Domain.Entities.ApplicationUser", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("ShippingAddress");
 
                     b.Navigation("User");
                 });
@@ -800,6 +814,25 @@ namespace Solidify.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.ShippingDetails", b =>
+                {
+                    b.HasOne("Solidify.Domain.Entities.ECommerce.ShippingAddress", "ShippingAddress")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Solidify.Domain.Entities.ECommerce.Order", "Order")
+                        .WithMany("ShippingDetails")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("ShippingAddress");
+                });
+
             modelBuilder.Entity("Solidify.Domain.Entities.Engineer", b =>
                 {
                     b.HasOne("Solidify.Domain.Entities.ApplicationUser", "User")
@@ -831,6 +864,8 @@ namespace Solidify.Infrastructure.Migrations
                     b.Navigation("CompanySales");
 
                     b.Navigation("Items");
+
+                    b.Navigation("ShippingDetails");
                 });
 #pragma warning restore 612, 618
         }

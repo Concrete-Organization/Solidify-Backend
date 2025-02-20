@@ -12,6 +12,12 @@ namespace Solidify.Application.E_Commerce.Orders.Profiles
                 .ForMember(dest => dest.ProductId, opt => opt.MapFrom(c => c.Id));
 
             CreateMap<Order, GetAllOrdersDto>();
+
+            CreateMap<OrderItem, OrderItemDto>();
+
+            CreateMap<Order, OrderDetailsDto>();
+
+            CreateMap<ShippingAddress, ShippingAddressDto>();
         }
     }
 }

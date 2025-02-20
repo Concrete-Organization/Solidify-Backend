@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Solidify.Infrastructure.Persistance;
 
@@ -11,9 +12,11 @@ using Solidify.Infrastructure.Persistance;
 namespace Solidify.Infrastructure.Migrations
 {
     [DbContext(typeof(SolidifyDbContext))]
-    partial class SolidifyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250127232656_udateNullablePropInCompany")]
+    partial class udateNullablePropInCompany
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -244,6 +247,54 @@ namespace Solidify.Infrastructure.Migrations
                     b.ToTable("Brands");
                 });
 
+            modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.Cart", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId")
+                        .IsUnique();
+
+                    b.ToTable("Carts");
+                });
+
+            modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.CartItem", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("CartId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("ProductId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CartId");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("CartItems");
+                });
+
             modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.Category", b =>
                 {
                     b.Property<int>("Id")
@@ -269,11 +320,18 @@ namespace Solidify.Infrastructure.Migrations
                     b.Property<string>("AdminId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("BankAccount")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("CommericalLicense")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CommericalNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CompanyAddress")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("CompanyName")
@@ -283,11 +341,26 @@ namespace Solidify.Infrastructure.Migrations
                     b.Property<int>("CompanyType")
                         .HasColumnType("int");
 
+                    b.Property<string>("CompanyWebSite")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FaceBookAccout")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("InstagramAccount")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaymentTerm")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.Property<long>("TaxId")
                         .HasColumnType("bigint");
+
+                    b.Property<string>("TwitterAccount")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CompanyId");
 
@@ -360,9 +433,6 @@ namespace Solidify.Infrastructure.Migrations
                     b.Property<int>("OrderStatus")
                         .HasColumnType("int");
 
-                    b.Property<int>("ShippingAddressId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
 
@@ -371,8 +441,6 @@ namespace Solidify.Infrastructure.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ShippingAddressId");
 
                     b.HasIndex("UserId");
 
@@ -383,10 +451,6 @@ namespace Solidify.Infrastructure.Migrations
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OrderId")
                         .IsRequired()
@@ -455,12 +519,13 @@ namespace Solidify.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ImageUri")
+                    b.Property<string>("Image")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Measurement")
-                        .HasColumnType("int");
+                    b.Property<string>("Measurement")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -515,7 +580,7 @@ namespace Solidify.Infrastructure.Migrations
                     b.ToTable("ProductReviews");
                 });
 
-            modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.ShippingAddress", b =>
+            modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.ShippingDetails", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -523,21 +588,22 @@ namespace Solidify.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("City")
+                    b.Property<string>("Carrier")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PostalCode")
+                    b.Property<string>("OrderId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Street")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<DateTime>("ShippingDate")
+                        .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.ToTable("ShippingAddresses");
+                    b.HasIndex("OrderId");
+
+                    b.ToTable("ShippingDetails");
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.Engineer", b =>
@@ -613,41 +679,34 @@ namespace Solidify.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Solidify.Domain.Entities.ApplicationUser", b =>
+            modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.Cart", b =>
                 {
-                    b.OwnsMany("Solidify.Domain.Entities.RefreshToken", "RefreshTokens", b1 =>
-                        {
-                            b1.Property<string>("ApplicationUserId")
-                                .HasColumnType("nvarchar(450)");
+                    b.HasOne("Solidify.Domain.Entities.ApplicationUser", "User")
+                        .WithOne("Cart")
+                        .HasForeignKey("Solidify.Domain.Entities.ECommerce.Cart", "UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                            b1.Property<int>("Id")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("int");
+                    b.Navigation("User");
+                });
 
-                            SqlServerPropertyBuilderExtensions.UseIdentityColumn(b1.Property<int>("Id"));
+            modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.CartItem", b =>
+                {
+                    b.HasOne("Solidify.Domain.Entities.ECommerce.Cart", "Cart")
+                        .WithMany("Items")
+                        .HasForeignKey("CartId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                            b1.Property<DateTime>("CreatedOn")
-                                .HasColumnType("datetime2");
+                    b.HasOne("Solidify.Domain.Entities.ECommerce.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                            b1.Property<DateTime>("ExpiresOn")
-                                .HasColumnType("datetime2");
+                    b.Navigation("Cart");
 
-                            b1.Property<DateTime?>("RevokedOn")
-                                .HasColumnType("datetime2");
-
-                            b1.Property<string>("Token")
-                                .IsRequired()
-                                .HasColumnType("nvarchar(max)");
-
-                            b1.HasKey("ApplicationUserId", "Id");
-
-                            b1.ToTable("RefreshToken");
-
-                            b1.WithOwner()
-                                .HasForeignKey("ApplicationUserId");
-                        });
-
-                    b.Navigation("RefreshTokens");
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.Companies.Company", b =>
@@ -707,19 +766,11 @@ namespace Solidify.Infrastructure.Migrations
 
             modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.Order", b =>
                 {
-                    b.HasOne("Solidify.Domain.Entities.ECommerce.ShippingAddress", "ShippingAddress")
-                        .WithMany()
-                        .HasForeignKey("ShippingAddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Solidify.Domain.Entities.ApplicationUser", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("ShippingAddress");
 
                     b.Navigation("User");
                 });
@@ -800,6 +851,17 @@ namespace Solidify.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.ShippingDetails", b =>
+                {
+                    b.HasOne("Solidify.Domain.Entities.ECommerce.Order", "Order")
+                        .WithMany("ShippingDetails")
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+                });
+
             modelBuilder.Entity("Solidify.Domain.Entities.Engineer", b =>
                 {
                     b.HasOne("Solidify.Domain.Entities.ApplicationUser", "User")
@@ -813,12 +875,20 @@ namespace Solidify.Infrastructure.Migrations
 
             modelBuilder.Entity("Solidify.Domain.Entities.ApplicationUser", b =>
                 {
+                    b.Navigation("Cart")
+                        .IsRequired();
+
                     b.Navigation("Orders");
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.Brand", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.Cart", b =>
+                {
+                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.Category", b =>
@@ -831,6 +901,8 @@ namespace Solidify.Infrastructure.Migrations
                     b.Navigation("CompanySales");
 
                     b.Navigation("Items");
+
+                    b.Navigation("ShippingDetails");
                 });
 #pragma warning restore 612, 618
         }

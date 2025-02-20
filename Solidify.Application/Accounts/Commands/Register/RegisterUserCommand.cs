@@ -31,11 +31,6 @@ namespace Solidify.Application.Accounts.Commands.Register
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
 
-        [Required]
-        public string PhoneNumber { get; set; }
-        [Required]
-        [MaxLength(250)]
-        public string? Address { get; set; }
     }
 
 }

@@ -59,11 +59,6 @@ namespace Solidify.Application.Extensions
             services.AddValidatorsFromAssembly(appAssembly)
                 .AddFluentValidationAutoValidation();
 
-            services.AddStackExchangeRedisCache(options =>
-            {
-                options.Configuration = configuration.GetConnectionString("RedisCS");
-            });
-
             services.Configure<SmtpSettings>(configuration.GetSection("SmtpSettings"));
 
             services.AddMemoryCache();

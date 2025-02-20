@@ -31,10 +31,5 @@ namespace Solidify.Application.Enginners.Commands.Register
         //[MaxLength(250)]
         //public string? Address { get; set; }
 
-        [Required]
-        public IFormFile CV { get; set; }
-
-        [Required]
-        public IFormFile SyndicateCard { get; set; }
     }
 }

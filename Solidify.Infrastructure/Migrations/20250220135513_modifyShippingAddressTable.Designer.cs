@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Solidify.Infrastructure.Persistance;
 
@@ -11,9 +12,11 @@ using Solidify.Infrastructure.Persistance;
 namespace Solidify.Infrastructure.Migrations
 {
     [DbContext(typeof(SolidifyDbContext))]
-    partial class SolidifyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250220135513_modifyShippingAddressTable")]
+    partial class modifyShippingAddressTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -535,7 +538,13 @@ namespace Solidify.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("ShippingAddresses");
                 });
@@ -796,6 +805,17 @@ namespace Solidify.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Product");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.ShippingAddress", b =>
+                {
+                    b.HasOne("Solidify.Domain.Entities.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });

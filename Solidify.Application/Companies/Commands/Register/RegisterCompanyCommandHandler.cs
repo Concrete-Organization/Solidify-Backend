@@ -22,7 +22,6 @@ namespace Solidify.Application.Companies.Commands.Register
             {
                 UserName = request.UserName,
                 Email = request.Email,
-                PhoneNumber = request.PhoneNumber,
                 Address = request.Address,
             };
             var result = await userManager.CreateAsync(user, request.Password);
@@ -43,14 +42,8 @@ namespace Solidify.Application.Companies.Commands.Register
             {   
                 CompanyId = user.Id,
                 CompanyName = request.CompanyName,
-                BankAccount = request.BankAccount,
-                CompanyWebSite = request.CompanyWebSite,
                 CommericalLicense = licenseUploadResult.Model.ToString(),
                 CommericalNumber = request.CommericalNumber,
-                FaceBookAccout = request.FaceBookAccout,
-                InstagramAccount = request.InstagramAccount,
-                TwitterAccount = request.TwitterAccount,  
-                PaymentTerm = request.PaymentTerm,
                 TaxId = request.TaxId,
             };
 
