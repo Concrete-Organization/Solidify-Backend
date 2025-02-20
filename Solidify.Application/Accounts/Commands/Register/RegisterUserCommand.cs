@@ -36,7 +36,6 @@ namespace Solidify.Application.Accounts.Commands.Register
         [Required]
         [MaxLength(250)]
         public string? Address { get; set; }
-
     }
 
 }

@@ -1,0 +1,13 @@
+﻿using Solidify.Application.Common.Pagination;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Solidify.Application.E_Commerce.Categories.Query.GetAllCategories
+{
+    public class GetAllCategoriesQuery : PaginatedQuery
+    {
+    }
+}
