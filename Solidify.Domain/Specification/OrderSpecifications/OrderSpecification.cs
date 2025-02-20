@@ -11,5 +11,11 @@ namespace Solidify.Domain.Specification.OrderSpecifications
         {
             AddPagination(pageSize, (pageNumber - 1) * pageSize);
         }
+
+        public OrderSpecification(string orderId): base(o => o.Id == orderId)
+        {
+            AddIncludes(o => o.Items);
+            AddIncludes(o => o.ShippingAddress);
+        }
     }
 }

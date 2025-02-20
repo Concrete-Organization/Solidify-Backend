@@ -23,7 +23,7 @@ namespace Solidify.Infrastructure.Persistance
         public DbSet<OrderPayment> OrderPayments { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductReview> ProductReviews { get; set; }
-        public DbSet<ShippingDetails> ShippingDetails { get; set; }
+        public DbSet<ShippingAddress> ShippingAddresses { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
