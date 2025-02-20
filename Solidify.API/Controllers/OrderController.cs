@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Solidify.Application.E_Commerce.Orders.Commands.CancelOrder;
 using Solidify.Application.E_Commerce.Orders.Commands.CreateOrder;
 using Solidify.Application.E_Commerce.Orders.Queries.GetAllOrders;
 using Solidify.Application.E_Commerce.Orders.Queries.GetOrderById;
@@ -26,6 +27,12 @@ namespace Solidify.API.Controllers
         public async Task<IActionResult> CreateOrder()
         {
             return await HandleCommand(new CreateOrderCommand());
+        }
+
+        [HttpPost("cancel/{orderId}")]
+        public async Task<IActionResult> CancelOrder(string orderId)
+        {
+            return await HandleCommand(new CancelOrderCommand(orderId));
         }
     }
 }
