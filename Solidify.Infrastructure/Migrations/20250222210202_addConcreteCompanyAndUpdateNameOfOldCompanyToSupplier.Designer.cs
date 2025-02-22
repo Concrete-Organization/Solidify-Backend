@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Solidify.Infrastructure.Persistance;
 
@@ -11,9 +12,11 @@ using Solidify.Infrastructure.Persistance;
 namespace Solidify.Infrastructure.Migrations
 {
     [DbContext(typeof(SolidifyDbContext))]
-    partial class SolidifyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250222210202_addConcreteCompanyAndUpdateNameOfOldCompanyToSupplier")]
+    partial class addConcreteCompanyAndUpdateNameOfOldCompanyToSupplier
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -269,9 +272,6 @@ namespace Solidify.Infrastructure.Migrations
                     b.Property<string>("CompanyId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<string>("Bio")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("CommericalLicense")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -281,12 +281,6 @@ namespace Solidify.Infrastructure.Migrations
 
                     b.Property<string>("CompanyName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CoverImageUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ProfileImageUrl")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<long>("TaxId")
@@ -478,9 +472,6 @@ namespace Solidify.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("Discount")
-                        .HasColumnType("int");
-
                     b.Property<string>("ImageUri")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -495,7 +486,7 @@ namespace Solidify.Infrastructure.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int?>("Rate")
+                    b.Property<int>("Rate")
                         .HasColumnType("int");
 
                     b.Property<int>("Stock")
