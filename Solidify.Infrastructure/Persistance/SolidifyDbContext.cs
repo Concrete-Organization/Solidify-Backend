@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Solidify.Domain.Entities;
+using Solidify.Domain.Entities.Community;
 using Solidify.Domain.Entities.ECommerce;
 using Solidify.Domain.Entities.ECommerce.Companies;
 
@@ -24,6 +25,10 @@ namespace Solidify.Infrastructure.Persistance
         public DbSet<Product> Products { get; set; }
         public DbSet<ProductReview> ProductReviews { get; set; }
         public DbSet<ShippingAddress> ShippingAddresses { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Like> Likes { get; set; }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
