@@ -15,7 +15,7 @@ namespace Solidify.Domain.Specification.PostSpecifications
             AddIncludes(p => p.Comments);
             AddIncludes(p => p.Likes);
             AddPagination(args.PageSize, (args.PageNumber - 1) * args.PageSize);
-            AddSortAsc(p => p.CreationDate);
+            AddSortDesc(p => p.CreationDate);
         }
     }
 }
