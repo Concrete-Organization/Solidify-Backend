@@ -8,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Solidify.Application.Common.User;
+using Solidify.Application.Community.Posts.Dtos;
+using Solidify.Application.Community.Posts.Resolvers;
 using Solidify.Application.E_Commerce.Products.Dtos;
 using Solidify.Application.E_Commerce.Products.Resolvers;
 using Solidify.Application.Email.Services;
@@ -17,6 +19,7 @@ using Solidify.Application.Jwt;
 using Solidify.Application.Jwt.Services;
 using Solidify.Application.Otp.Services;
 using Solidify.Application.Services.Caching;
+using Solidify.Domain.Entities.Community;
 using Solidify.Domain.Entities.ECommerce;
 using Solidify.Domain.Interfaces.Services.Cashing;
 
@@ -54,7 +57,8 @@ namespace Solidify.Application.Extensions
             });
 
             services.AddAutoMapper(appAssembly);
-            services.AddSingleton<IValueResolver<Product, ProductDto, string>, ImageUriResolver>();
+            services.AddSingleton<IValueResolver<Product, ProductDto, string>, ProductImageUriResolver>();
+            services.AddSingleton<IValueResolver<Post, PostDto, List<string>>, PostImagesUriResolver>();
 
             services.AddValidatorsFromAssembly(appAssembly)
                 .AddFluentValidationAutoValidation();
