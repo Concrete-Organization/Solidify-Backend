@@ -19,7 +19,7 @@ namespace Solidify.Application.E_Commerce.Products.Profiles
 
             CreateMap<Product, ProductDto>()
                 .ForMember(dest => dest.ImageUri,
-                    op => op.MapFrom<ImageUriResolver>());
+                    op => op.MapFrom<ProductImageUriResolver>());
 
             CreateMap<GetAllProductsQuery, ProductSpecificationParameters>();
 

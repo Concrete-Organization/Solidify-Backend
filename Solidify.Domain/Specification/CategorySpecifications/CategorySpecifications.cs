@@ -25,29 +25,8 @@ namespace Solidify.Domain.Specification.CategorySpecifications
         {
             GetIncludes();
 
-            if (!string.IsNullOrEmpty(args.SortBy))
-            {
-                //var sortByLower = args.SortBy.ToLower();
-
-                //var columnSelector = new Dictionary<string, Expression<Func<Category, object>>>()
-                //{
-                //    {nameof(Category.Name).ToLower(),p=>p.Name}
-                //};
-
-                switch (args.SortDirection)
-                {
-                    case SortDirection.Ascending:
-                        AddSortAsc(c=>c.Name);
-                        break;
-                    case SortDirection.Descending:
-                        AddSortDesc(c=>c.Name);
-                        break;
-                }
-            }
-            else
-            {
-                AddSortAsc(c => c.Name);
-            }
+            AddSortAsc(c => c.Name);
+            
             AddPagination(args.PageSize,args.PageSize * (args.PageNumber - 1));
         }
         private void GetIncludes()
