@@ -9,6 +9,6 @@ namespace Solidify.Domain.Interfaces
 {
     public interface ICompanyRepository
     {
-        Task AddCompany(Company company);
+        Task AddCompany(ConcreteCompany company);
     }
 }
