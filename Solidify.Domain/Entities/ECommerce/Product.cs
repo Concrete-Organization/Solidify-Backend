@@ -12,13 +12,14 @@ namespace Solidify.Domain.Entities.ECommerce
         public string Description { get; set; }
         public MeasurementUnit Measurement { get; set; }
         public string ImageUri { get; set; }
-        public int Rate { get; set; }
+        public int? Rate { get; set; }
+        public int? Discount { get; set; }
         public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
         public int BrandId { get; set; }
         public virtual Brand Brand { get; set; }
-        public string CompanyId { get; set; }
-        public virtual Company Company { get; set; }
+        public string? SupplierId { get; set; }
+        public virtual Supplier Supplier { get; set; }
         //public string? AdminId { get; set; }
         //public virtual ApplicationUser? Admin { get; set; }
 
