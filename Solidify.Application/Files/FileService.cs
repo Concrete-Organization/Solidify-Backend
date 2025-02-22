@@ -24,7 +24,7 @@ namespace Solidify.Application.Files
             string extention = Path.GetExtension(file.FileName.ToLower());
             string fileName = Guid.NewGuid().ToString() + extention;
 
-            string folderName = GetFolderName(fileType);
+            string folderName = fileType.ToString() + "s";
 
 
             string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", folderName);
@@ -49,7 +49,7 @@ namespace Solidify.Application.Files
 
         public GeneralResponseDto DeleteFile(string fileName, FileType fileType)
         {
-            string folderName = GetFolderName(fileType);
+            string folderName = fileType.ToString();
 
             string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "Uploads", folderName);
 
@@ -94,17 +94,6 @@ namespace Solidify.Application.Files
             }
 
             return null; 
-        }
-        private static string GetFolderName(FileType fileType)
-        {
-            return fileType switch
-            {
-                FileType.CV => FileFolders.CVs,
-                FileType.License => FileFolders.Licenses,
-                FileType.SyndicateCard => FileFolders.SyndicateCards,
-                FileType.ProductImage => FileFolders.ProductImages,
-                _ => FileFolders.Others
-            };
         }
 
     }
