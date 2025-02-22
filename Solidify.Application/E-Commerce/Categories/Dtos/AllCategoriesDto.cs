@@ -9,6 +9,7 @@ namespace Solidify.Application.E_Commerce.Categories.Dtos
 {
     public class AllCategoriesDto
     {
+        public int Id { get; set; }
         public string Name { get; set; }
     }
 }
