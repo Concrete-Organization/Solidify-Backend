@@ -7,6 +7,6 @@ namespace Solidify.Application.Community.Posts.Commands.CreatePost
     public class CreatePostCommand : IRequest<GeneralResponseDto>
     {
         public string? Content { get; set; }
-        public List<IFormFile>? ImageUris { get; set; }
+        public List<IFormFile>? ImageUris { get; set; } = new List<IFormFile>();
     }
 }

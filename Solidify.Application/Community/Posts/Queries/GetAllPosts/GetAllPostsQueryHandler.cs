@@ -17,11 +17,12 @@ namespace Solidify.Application.Community.Posts.Queries.GetAllPosts
         public async Task<GeneralResponseDto> Handle(GetAllPostsQuery request, CancellationToken cancellationToken)
         {
             var (posts, count) = await unitOfWork.GetRepository<Post>().GetAllAsync(new PostSpecification(mapper.Map<PostSpecificationParameters>(request)));
+            var postsDto = mapper.Map<IEnumerable<PostDto>>(posts);
 
             return GeneralResponse.CreateResponse(
                 true, 
                 StatusCodes.Status200OK, 
-                new PagedResponse<PostDto>(mapper.Map<IEnumerable<PostDto>>(posts), request.PageSize, request.PageNumber, count),
+                new PagedResponse<PostDto>(postsDto, request.PageSize, request.PageNumber, count),
                 "");
         }
     }

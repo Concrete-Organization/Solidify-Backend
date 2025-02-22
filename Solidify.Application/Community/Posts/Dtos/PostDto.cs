@@ -1,12 +1,15 @@
-﻿using Solidify.Domain.Entities.Community;
+﻿using Solidify.Application.Community.Comments.Dtos;
+using Solidify.Domain.Entities.Community;
 
 namespace Solidify.Application.Community.Posts.Dtos
 {
     public class PostDto
     {
+        public int Id { get; set; }
+        public DateTime CreationDate { get; set; }
         public string? Content { get; set; }
         public List<string> ImageUris { get; set; }
-        public  List<Comment> Comments { get; set; }
+        public  List<CommentDto> Comments { get; set; }
         public  List<Like> Likes { get; set; }
 
     }

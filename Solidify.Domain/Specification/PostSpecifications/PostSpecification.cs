@@ -5,6 +5,9 @@ namespace Solidify.Domain.Specification.PostSpecifications
 {
     public class PostSpecification : BaseSpecification<Post>
     {
+        public PostSpecification(int postId): base(p => p.Id == postId)
+        {
+        }
         public PostSpecification(PostSpecificationParameters args): base(p => (
         String.IsNullOrEmpty(args.SearchedPhrase) || EF.Functions.Like(p.Content.ToLower(), $"%{args.SearchedPhrase.ToLower()}%")
             ))

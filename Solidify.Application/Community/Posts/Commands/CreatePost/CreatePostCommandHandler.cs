@@ -37,7 +37,7 @@ namespace Solidify.Application.Community.Posts.Commands.CreatePost
             newPost.UserId = currentUser.GetUserId();
             await unitOfWork.GetRepository<Post>().AddAsync(newPost);
             await unitOfWork.Commit();
-            return GeneralResponse.CreateResponse(true, StatusCodes.Status204NoContent, null,
+            return GeneralResponse.CreateResponse(true, StatusCodes.Status201Created, null,
                 "Post created successfully");
         }
     }
