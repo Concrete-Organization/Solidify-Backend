@@ -14,6 +14,6 @@ namespace Solidify.Domain.Entities.ECommerce
         public int ShippingAddressId { get; set; }
         public virtual ShippingAddress? ShippingAddress { get; set; }
         public virtual ICollection<OrderItem>? Items { get; set; } = new HashSet<OrderItem>();
-        public virtual ICollection<CompanySales>? CompanySales { get; set; } = new HashSet<CompanySales>();
+        public virtual ICollection<SupplierSales>? CompanySales { get; set; } = new HashSet<SupplierSales>();
     }
 }

@@ -11,9 +11,9 @@ namespace Solidify.Infrastructure.Repositories
 {
     public class CompanyRepository(SolidifyDbContext context) : ICompanyRepository
     {
-        public async Task AddCompany(Company company)
+        public async Task AddCompany(ConcreteCompany company)
         {
-            await context.Companies.AddAsync(company);
+            await context.ConcreteCompanies.AddAsync(company);
             await context.SaveChangesAsync();
         }
     }

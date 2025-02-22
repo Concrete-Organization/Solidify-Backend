@@ -60,7 +60,7 @@ namespace Solidify.Domain.Specification.ProductSpecifications
         private void GetIncludes()
         {
             AddIncludes(p => p.Brand);
-            AddIncludes(p => p.Company);
+            AddIncludes(p => p.Supplier);
             AddIncludes(p => p.Category);
         }
     }

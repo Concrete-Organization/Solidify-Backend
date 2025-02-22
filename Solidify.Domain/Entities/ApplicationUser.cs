@@ -9,6 +9,7 @@ namespace Solidify.Domain.Entities
         [MaxLength(250)]
         public string? Address { get; set; }
         public bool IsDeleted { get; set; } = false;
+        public DateTime? RegisterDate { get; set; }  
 
         public virtual ICollection<RefreshToken>? RefreshTokens { get; set; } = new HashSet<RefreshToken>();
         public virtual ICollection<Order>? Orders { get; set; } = new HashSet<Order>();

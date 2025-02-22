@@ -38,7 +38,7 @@ namespace Solidify.Application.Companies.Commands.Register
                 return licenseUploadResult;
             }
 
-            var company = new Company
+            var company = new ConcreteCompany
             {   
                 CompanyId = user.Id,
                 CompanyName = request.CompanyName,

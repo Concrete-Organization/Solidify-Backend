@@ -14,8 +14,9 @@ namespace Solidify.Infrastructure.Persistance
         }
         public DbSet<ApplicationUser> Users { get; set; }
         public DbSet<Engineer> Engineers { get; set; }
-        public DbSet<Company> Companies { get; set; }
-        public DbSet<CompanySales> CompanySales { get; set; }
+        public DbSet<Supplier> Suppliers { get; set; }
+        public DbSet<SupplierSales> SupplierSales { get; set; }
+        public DbSet<ConcreteCompany> ConcreteCompanies { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<FavoriteProduct> FavoriteProducts { get; set; }
