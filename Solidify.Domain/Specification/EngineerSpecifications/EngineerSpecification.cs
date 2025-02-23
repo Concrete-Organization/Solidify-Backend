@@ -9,14 +9,14 @@ namespace Solidify.Domain.Specification.EngineerSpecification
 {
     public class EngineerSpecification : BaseSpecification<Engineer>
     {
-        public EngineerSpecification(string id) : base(c => c.EngineerId == id)
+        public EngineerSpecification(string id) : base(e => e.EngineerId == id)
         {
             GetIncludes();
         }
 
         private void GetIncludes()
         {
-            AddIncludes(c => c.User);
+            AddIncludes(e => e.User);
         }
     }
 

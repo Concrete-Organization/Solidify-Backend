@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace Solidify.Application.Companies.Queries.GetCompanyQuery
 {
-    public class GetCompanyQuery : IRequest<GeneralResponseDto>
+    public class GetCompanyQuery(string id) : IRequest<GeneralResponseDto>
     {
+        public string Id { get; } = id;
     }
 }

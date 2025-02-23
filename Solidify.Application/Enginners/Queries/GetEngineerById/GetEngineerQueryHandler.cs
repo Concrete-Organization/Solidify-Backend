@@ -4,6 +4,8 @@ using Solidify.Application.Common;
 using Solidify.Application.Common.Dtos;
 using Solidify.Application.Enginners.Dtos;
 using Solidify.Domain.Entities;
+using Solidify.Domain.Entities.ECommerce;
+using Solidify.Domain.Exceptions;
 using Solidify.Domain.Interfaces;
 using Solidify.Domain.Specification.EngineerSpecification;
 using System;
@@ -19,8 +21,10 @@ namespace Solidify.Application.Enginners.Queries.GetEngineerQuery
     {
         public async Task<GeneralResponseDto> Handle(GetEngineerQuery request, CancellationToken cancellationToken)
         {
-            var engSpec = new EngineerSpecification(request.Id);
-            var engineer = await unitOfWork.GetRepository<Engineer>().GetAsync(engSpec); 
+            var engineer = await unitOfWork.GetRepository<Engineer>()
+                .GetAsync(new EngineerSpecification(request.Id))
+                    ?? throw new NotFoundException(nameof(Engineer), request.Id);
+           
             var EngDto = mapper.Map<GetEngineerDto>(engineer);
 
             return GeneralResponse.CreateResponse(true, 200, EngDto, "Engineer return successfully");
