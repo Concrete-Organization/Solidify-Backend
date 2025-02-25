@@ -22,7 +22,7 @@ namespace Solidify.Application.Community.Comments.Commands.CreateComment
             {
                 Content = request.Content,
                 PostId = request.PostId,
-                UserId = currentUser.GetUserId()
+                EngineerId = currentUser.GetUserId()
             };
             await unitOfWork.GetRepository<Comment>().AddAsync(newComment);
             await unitOfWork.Commit();

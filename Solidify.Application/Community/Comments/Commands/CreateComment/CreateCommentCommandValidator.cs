@@ -9,8 +9,9 @@ namespace Solidify.Application.Community.Comments.Commands.CreateComment
         {
             RuleFor(c => c.Content)
                 .NotEmpty()
-                .MaximumLength(200)
-                .WithMessage("The Content field must not exceed 200 characters.");
+                .WithMessage("Content is required.")
+                .MaximumLength(500)
+                .WithMessage("Content must not exceed 500 characters.");
         }
     }
 }
