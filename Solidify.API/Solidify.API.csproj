@@ -24,6 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\Uploads\Engineer\" />
     <Folder Include="wwwroot\Uploads\Licenses\" />
     <Folder Include="wwwroot\Uploads\SyndicateCards\" />
   </ItemGroup>

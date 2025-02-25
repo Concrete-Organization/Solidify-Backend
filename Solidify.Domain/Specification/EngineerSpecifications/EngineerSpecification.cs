@@ -1,12 +1,23 @@
 ﻿using Solidify.Domain.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Solidify.Domain.Specification.EngineerSpecifications
+namespace Solidify.Domain.Specification.EngineerSpecification
 {
     public class EngineerSpecification : BaseSpecification<Engineer>
     {
-        public EngineerSpecification(string engineerId) : base(e => e.EngineerId == engineerId)
+        public EngineerSpecification(string id) : base(e => e.EngineerId == id)
         {
-            
+            GetIncludes();
+        }
+
+        private void GetIncludes()
+        {
+            AddIncludes(e => e.User);
         }
     }
+
 }

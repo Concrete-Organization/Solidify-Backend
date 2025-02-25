@@ -22,6 +22,7 @@ namespace Solidify.Application.Jwt.Services
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim("User Name", user.UserName),
                 new Claim("Email", user.Email),
+                new Claim("Id", user.Id)
             };
 
             var roles = await userManager.GetRolesAsync(user);

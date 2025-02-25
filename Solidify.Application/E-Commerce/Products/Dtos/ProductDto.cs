@@ -11,6 +11,8 @@ namespace Solidify.Application.E_Commerce.Products.Dtos
         public MeasurementUnit Measurement { get; set; }
         public string ImageUri { get; set; }
         public int Rate { get; set; }
+        public int Discount { get; set; }
         public string BrandName { get; set; }
+
     }
 }

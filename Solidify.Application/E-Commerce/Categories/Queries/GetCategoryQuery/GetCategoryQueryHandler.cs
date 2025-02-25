@@ -22,7 +22,7 @@ namespace Solidify.Application.E_Commerce.Categories.Queries
         {
             var spec = new CategorySpecifications(request.Id);
 
-            var category = await unitOfWork.GetRepository<Category>().GetAsync(spec) 
+            var category = await unitOfWork.GetRepository<Category>().GetAsync(new CategorySpecifications(request.Id)) 
                 ?? throw new NotFoundException(nameof(Category), request.Id);
 
             return GeneralResponse.CreateResponse(true, 200, mapper.Map<CategoryDto>(category), "");
