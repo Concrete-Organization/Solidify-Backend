@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Solidify.Infrastructure.Persistance;
 
@@ -11,9 +12,11 @@ using Solidify.Infrastructure.Persistance;
 namespace Solidify.Infrastructure.Migrations
 {
     [DbContext(typeof(SolidifyDbContext))]
-    partial class SolidifyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250223203457_UpdateCommunityTables")]
+    partial class UpdateCommunityTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -261,7 +264,7 @@ namespace Solidify.Infrastructure.Migrations
                     b.ToTable("Comments");
                 });
 
-            modelBuilder.Entity("Solidify.Domain.Entities.Community.Likes.CommentLike", b =>
+            modelBuilder.Entity("Solidify.Domain.Entities.Community.Like", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -279,67 +282,18 @@ namespace Solidify.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int>("PostId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
                     b.HasIndex("CommentId");
 
                     b.HasIndex("EngineerId");
 
-                    b.ToTable("CommentLikes");
-                });
-
-            modelBuilder.Entity("Solidify.Domain.Entities.Community.Likes.PostLike", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("EngineerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("PostId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EngineerId");
-
                     b.HasIndex("PostId");
 
-                    b.ToTable("PostLikes");
-                });
-
-            modelBuilder.Entity("Solidify.Domain.Entities.Community.Likes.ReplyLike", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("EngineerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("ReplyId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EngineerId");
-
-                    b.HasIndex("ReplyId");
-
-                    b.ToTable("ReplyLikes");
+                    b.ToTable("Likes");
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.Community.Post", b =>
@@ -369,37 +323,6 @@ namespace Solidify.Infrastructure.Migrations
                     b.HasIndex("EngineerId");
 
                     b.ToTable("Posts");
-                });
-
-            modelBuilder.Entity("Solidify.Domain.Entities.Community.Reply", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CommentId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("EngineerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CommentId");
-
-                    b.HasIndex("EngineerId");
-
-                    b.ToTable("Reply");
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.Brand", b =>
@@ -870,10 +793,10 @@ namespace Solidify.Infrastructure.Migrations
                     b.Navigation("Post");
                 });
 
-            modelBuilder.Entity("Solidify.Domain.Entities.Community.Likes.CommentLike", b =>
+            modelBuilder.Entity("Solidify.Domain.Entities.Community.Like", b =>
                 {
                     b.HasOne("Solidify.Domain.Entities.Community.Comment", "Comment")
-                        .WithMany("Likes")
+                        .WithMany()
                         .HasForeignKey("CommentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -884,20 +807,7 @@ namespace Solidify.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Comment");
-
-                    b.Navigation("Engineer");
-                });
-
-            modelBuilder.Entity("Solidify.Domain.Entities.Community.Likes.PostLike", b =>
-                {
-                    b.HasOne("Solidify.Domain.Entities.Engineer", "Engineer")
-                        .WithMany()
-                        .HasForeignKey("EngineerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Solidify.Domain.Entities.Community.Post", "Comment")
+                    b.HasOne("Solidify.Domain.Entities.Community.Post", "Post")
                         .WithMany("Likes")
                         .HasForeignKey("PostId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -906,25 +816,8 @@ namespace Solidify.Infrastructure.Migrations
                     b.Navigation("Comment");
 
                     b.Navigation("Engineer");
-                });
 
-            modelBuilder.Entity("Solidify.Domain.Entities.Community.Likes.ReplyLike", b =>
-                {
-                    b.HasOne("Solidify.Domain.Entities.Engineer", "Engineer")
-                        .WithMany()
-                        .HasForeignKey("EngineerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Solidify.Domain.Entities.Community.Reply", "Reply")
-                        .WithMany("Likes")
-                        .HasForeignKey("ReplyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Engineer");
-
-                    b.Navigation("Reply");
+                    b.Navigation("Post");
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.Community.Post", b =>
@@ -934,25 +827,6 @@ namespace Solidify.Infrastructure.Migrations
                         .HasForeignKey("EngineerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Engineer");
-                });
-
-            modelBuilder.Entity("Solidify.Domain.Entities.Community.Reply", b =>
-                {
-                    b.HasOne("Solidify.Domain.Entities.Community.Comment", "Comment")
-                        .WithMany("Replies")
-                        .HasForeignKey("CommentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Solidify.Domain.Entities.Engineer", "Engineer")
-                        .WithMany()
-                        .HasForeignKey("EngineerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Comment");
 
                     b.Navigation("Engineer");
                 });
@@ -1126,22 +1000,10 @@ namespace Solidify.Infrastructure.Migrations
                     b.Navigation("Orders");
                 });
 
-            modelBuilder.Entity("Solidify.Domain.Entities.Community.Comment", b =>
-                {
-                    b.Navigation("Likes");
-
-                    b.Navigation("Replies");
-                });
-
             modelBuilder.Entity("Solidify.Domain.Entities.Community.Post", b =>
                 {
                     b.Navigation("Comments");
 
-                    b.Navigation("Likes");
-                });
-
-            modelBuilder.Entity("Solidify.Domain.Entities.Community.Reply", b =>
-                {
                     b.Navigation("Likes");
                 });
 

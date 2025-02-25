@@ -1,4 +1,6 @@
-﻿namespace Solidify.Domain.Entities.Community
+﻿using Solidify.Domain.Entities.Community.Likes;
+
+namespace Solidify.Domain.Entities.Community
 {
     public class Post
     {
@@ -6,10 +8,10 @@
         public string? Content { get; set; }
         public List<string> ImageUris { get; set; } = new List<string>();
         public DateTime CreationDate { get; set; } = DateTime.Now;
-        public string UserId { get; set; }
-        public ApplicationUser User { get; set; }
+        public string EngineerId { get; set; }
+        public Engineer Engineer { get; set; }
         public virtual ICollection<Comment>? Comments { get; set; } = new HashSet<Comment>();
-        public virtual ICollection<Like>? Likes { get; set; } = new HashSet<Like>();
+        public virtual ICollection<PostLike>? Likes { get; set; } = new HashSet<PostLike>();
 
     }
 }
