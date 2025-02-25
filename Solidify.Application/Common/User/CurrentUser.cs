@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Http;
 using Solidify.Domain.Entities;
 using Solidify.Domain.Interfaces;
-using Solidify.Domain.Specification.EngineerSpecifications;
 
 namespace Solidify.Application.Common.User
 {

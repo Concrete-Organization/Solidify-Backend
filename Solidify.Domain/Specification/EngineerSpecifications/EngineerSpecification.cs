@@ -1,11 +1,6 @@
 ﻿using Solidify.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Solidify.Domain.Specification.EngineerSpecification
+namespace Solidify.Domain.Specification.EngineerSpecifications
 {
     public class EngineerSpecification : BaseSpecification<Engineer>
     {
