@@ -15,6 +15,9 @@ namespace Solidify.Infrastructure
             query = spec.Includes.Aggregate(query,
                 (currentQuery, includeExpression) => currentQuery.Include(includeExpression));
 
+            query = spec.IncludeStrings.Aggregate(query,
+                (currentQuery, includeExpression) => currentQuery.Include(includeExpression));
+
             if (spec.SortAsc is not null)
                 query = query.OrderBy(spec.SortAsc);
 
