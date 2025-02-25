@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Solidify.Application.Common.User;
 using Solidify.Application.Community.Comments.Dtos;
-using Solidify.Application.Community.Helper;
+using Solidify.Application.Community.Comments.Resolvers;
 using Solidify.Application.Community.Posts.Dtos;
 using Solidify.Application.Community.Posts.Resolvers;
 using Solidify.Application.E_Commerce.Products.Dtos;
@@ -62,11 +62,9 @@ namespace Solidify.Application.Extensions
             services.AddSingleton<IValueResolver<Product, ProductDto, string>, ProductImageUriResolver>();
 
             services.AddSingleton<IValueResolver<Post, PostDto, List<string>>, PostImagesUriResolver>();
-            services.AddScoped<IValueResolver<Post, PostDto, string?>, ProfileImageUriResolver<Post, PostDto>>();
-            services.AddScoped<IValueResolver<Post, PostDto, string?>, EngineerNameResolver<Post, PostDto>>();
+            services.AddScoped<IValueResolver<Comment, CommentDto, string?>, CommentProfileImageUriResolver>();
 
-            services.AddScoped<IValueResolver<Comment, CommentDto, string?>, ProfileImageUriResolver<Comment, CommentDto>>();
-            services.AddScoped<IValueResolver<Comment, CommentDto, string?>, EngineerNameResolver<Comment, CommentDto>>();
+            services.AddScoped<IValueResolver<Post, PostDto, string?>, PostProfileImageUriResolver>();
 
             services.AddValidatorsFromAssembly(appAssembly)
                 .AddFluentValidationAutoValidation();

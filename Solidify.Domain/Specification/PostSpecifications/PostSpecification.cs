@@ -12,7 +12,9 @@ namespace Solidify.Domain.Specification.PostSpecifications
         String.IsNullOrEmpty(args.SearchedPhrase) || EF.Functions.Like(p.Content.ToLower(), $"%{args.SearchedPhrase.ToLower()}%")
             ))
         {
-            AddIncludes(p => p.Comments);
+            //AddIncludes(p => p.Comments);
+            //AddIncludes(p => p.Likes);
+            AddIncludes(p => p.Engineer);
             AddIncludes(p => p.Likes);
             AddPagination(args.PageSize, (args.PageNumber - 1) * args.PageSize);
             AddSortDesc(p => p.CreationDate);

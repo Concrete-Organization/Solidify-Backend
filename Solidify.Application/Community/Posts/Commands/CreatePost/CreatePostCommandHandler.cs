@@ -34,7 +34,7 @@ namespace Solidify.Application.Community.Posts.Commands.CreatePost
                     "You must provide either an image or content");
             }
             newPost.Content = request.Content;
-            newPost.UserId = currentUser.GetUserId();
+            newPost.EngineerId = currentUser.GetUserId();
             await unitOfWork.GetRepository<Post>().AddAsync(newPost);
             await unitOfWork.Commit();
             return GeneralResponse.CreateResponse(true, StatusCodes.Status201Created, null,

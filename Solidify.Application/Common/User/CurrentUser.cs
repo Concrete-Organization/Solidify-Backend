@@ -12,10 +12,5 @@ namespace Solidify.Application.Common.User
         {
             return httpContextAccessor.HttpContext!.User.FindFirst(c => c.Type == ClaimTypes.NameIdentifier)!.Value;
         }
-
-        public async Task<Engineer?> GetEngineer(string engineerId)
-        {
-            return await unitOfWork.GetRepository<Engineer>().GetAsync(new EngineerSpecification(engineerId));
-        }
     }
 }
