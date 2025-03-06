@@ -12,28 +12,28 @@ namespace Solidify.API.Controllers
     [Authorize]
     public class CartItemController(IMediator mediator) : BaseController(mediator)
     {
-        [HttpPost("{id}")]
-        public async Task<IActionResult> AddCartItem(string id)
+        [HttpPost("{productId}")]
+        public async Task<IActionResult> AddCartItem(string productId)
         {
-            return await HandleCommand(new AddCartItemCommand(id));
+            return await HandleCommand(new AddCartItemCommand(productId));
         }
         
-        [HttpPost("{id}/increment")]
-        public async Task<IActionResult> IncrementCartItem(string id)
+        [HttpPost("{productId}/increment")]
+        public async Task<IActionResult> IncrementCartItem(string productId)
         {
-            return await HandleCommand(new IncrementCartItemCommand(id));
+            return await HandleCommand(new IncrementCartItemCommand(productId));
         }
         
-        [HttpPost("{id}/decrement")]
-        public async Task<IActionResult> DecrementCartItem(string id)
+        [HttpPost("{productId}/decrement")]
+        public async Task<IActionResult> DecrementCartItem(string productId)
         {
-            return await HandleCommand(new DecrementCartItemCommand(id));
+            return await HandleCommand(new DecrementCartItemCommand(productId));
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCartItem(string id)
+        [HttpDelete("{productId}")]
+        public async Task<IActionResult> DeleteCartItem(string productId)
         {
-            return await HandleCommand(new DeleteCartItemCommand(id));
+            return await HandleCommand(new DeleteCartItemCommand(productId));
         }
     }
 }
