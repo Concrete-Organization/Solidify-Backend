@@ -16,6 +16,7 @@ namespace Solidify.Domain.Specification.PostSpecifications
             //AddIncludes(p => p.Likes);
             AddIncludes(p => p.Engineer);
             AddIncludes(p => p.Likes);
+            AddIncludes(p => p.Comments);
             AddPagination(args.PageSize, (args.PageNumber - 1) * args.PageSize);
             AddSortDesc(p => p.CreationDate);
         }

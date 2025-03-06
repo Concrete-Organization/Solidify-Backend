@@ -10,6 +10,7 @@ namespace Solidify.Application.Community.Posts.Dtos
         public string? Content { get; set; }
         public List<string> ImageUris { get; set; }
         public int LikesCount { get; set; }
+        public int CommentsCount { get; set; }
 
         //public  List<CommentDto> Comments { get; set; }
         //public  List<Like> Likes { get; set; }
