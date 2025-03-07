@@ -9,8 +9,8 @@ namespace Solidify.Application.Enginners.Commands.Register
     public class RegisterEngineerCommand :RegisterUserCommand ,IRequest<GeneralResponseDto>
     {
         //[MinLength(3)]
-        //[Required]
-        //public string UserName { get; set; }
+        [Required]
+        public string FullName { get; set; }
 
         //[Required]
         //[EmailAddress]

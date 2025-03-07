@@ -40,7 +40,8 @@ namespace Solidify.Application.Enginners.Commands.Register
           
             var engineer = new Engineer
             {
-                EngineerId = user.Id
+                EngineerId = user.Id,
+                EngineerName = request.FullName
             };
 
             //we must save changes to engineer table ????????????
