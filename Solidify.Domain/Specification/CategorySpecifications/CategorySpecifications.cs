@@ -32,6 +32,7 @@ namespace Solidify.Domain.Specification.CategorySpecifications
         private void GetIncludes()
         {
             AddIncludes(c => c.Products);
+            AddIncludes($"{nameof(Category.Products)}.{nameof(Product.Brand)}");
         }
     }
 }
