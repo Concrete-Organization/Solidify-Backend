@@ -5,5 +5,7 @@ public enum FileType
     CV,
     License,
     SyndicateCard,
-    ProductImage
+    ProductImage,
+    Engineer,
+    Company
 }
