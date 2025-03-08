@@ -95,6 +95,18 @@ namespace Solidify.Application.Files
 
             return null; 
         }
+        private static string GetFolderName(FileType fileType)
+        {
+            return fileType switch
+            {
+                FileType.License => FileFolders.Licenses,
+                FileType.SyndicateCard => FileFolders.SyndicateCards,
+                FileType.ProductImage => FileFolders.ProductImages,
+                FileType.Engineer => FileFolders.Engineers,
+                FileType.Company => FileFolders.Companies,
+                _ => FileFolders.Others
+            };
+        }
 
     }
 }

@@ -4,6 +4,7 @@ using AutoMapper;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -22,7 +23,9 @@ using Solidify.Application.Jwt.Services;
 using Solidify.Application.Otp.Services;
 using Solidify.Application.Services.Caching;
 using Solidify.Domain.Entities.Community;
+using Solidify.Domain.Constants;
 using Solidify.Domain.Entities.ECommerce;
+using Solidify.Domain.Enums;
 using Solidify.Domain.Interfaces.Services.Cashing;
 
 namespace Solidify.Application.Extensions

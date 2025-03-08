@@ -19,7 +19,8 @@ namespace Solidify.Application.Enginners.Commands.Register
 {
     public class RegisterEngineerCommandHandler(UserManager<ApplicationUser> userManager,
         SignInManager<ApplicationUser> signInManager
-        , IEngineerRepository engineerRepository) : IRequestHandler<RegisterEngineerCommand, GeneralResponseDto>
+        , IEngineerRepository engineerRepository,
+        IJwtService jwtService) : IRequestHandler<RegisterEngineerCommand, GeneralResponseDto>
     {
         public async Task<GeneralResponseDto> Handle(RegisterEngineerCommand request, CancellationToken cancellationToken)
         {
@@ -50,8 +51,11 @@ namespace Solidify.Application.Enginners.Commands.Register
             await userManager.AddToRoleAsync(user, "Engineer");
             await signInManager.SignInAsync(user, isPersistent: false);
 
+            var authResponse = await jwtService.GenerateToken(user);
 
-            return CreateResponse(true, 201, new { user.Id, user.UserName, user.Email }, "Engineer registered successfully");
+
+
+            return CreateResponse(true, 201, authResponse, "Engineer registered successfully");
             
         }
     }

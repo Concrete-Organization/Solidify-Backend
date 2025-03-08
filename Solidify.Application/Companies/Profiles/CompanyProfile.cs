@@ -15,6 +15,21 @@ namespace Solidify.Application.Companies.Profiles
         {
             CreateMap<ConcreteCompany, GetCompanyDto>()
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.UserName));
+
+
+            CreateMap<UpdateCompanyDto, ConcreteCompany>();
+
+
+            //CreateMap<ConcreteCompany, UpdateCompanyDto>()
+            //     .ForAllMembers(opt => opt.Condition((src, dest, srcMember) => srcMember != null));
+
+
+
+
+                 //.ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.User.UserName))
+                 //.ReverseMap();
+                 
+
         }
     }
 }
