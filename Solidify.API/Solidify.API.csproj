@@ -24,13 +24,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\Uploads\Engineer\" />
+    <Folder Include="wwwroot\Uploads\Companies\" />
+    <Folder Include="wwwroot\Uploads\Engineers\" />
     <Folder Include="wwwroot\Uploads\Licenses\" />
+    <Folder Include="wwwroot\Uploads\ProductImages\" />
     <Folder Include="wwwroot\Uploads\SyndicateCards\" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\Uploads\CVs\abd1798c-0bb7-49b8-a0d3-00af71b09b61.png" />
     <None Include="wwwroot\Uploads\Others\7c49d15c-0edf-4d8f-bc44-43ae20cb2da0.png" />
   </ItemGroup>
 
