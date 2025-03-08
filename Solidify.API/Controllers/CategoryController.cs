@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Solidify.Application.E_Commerce.Categories.Commands;
+using Solidify.Application.E_Commerce.Categories.Commands.DeleteCategory;
 using Solidify.Application.E_Commerce.Categories.Queries;
 using Solidify.Application.E_Commerce.Categories.Query.GetAllCategories;
 
@@ -16,11 +18,23 @@ namespace Solidify.API.Controllers
             return await HandleCommand(query);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        [HttpGet("{Id}")]
+        public async Task<IActionResult> GetById(int Id, [FromQuery] GetCategoryQuery query)
         {
-            return await HandleCommand(new GetCategoryQuery(id));
+            query.Id = Id;
+            return await HandleCommand(query);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> AddCategory(AddCategotyCommand command)
+        {
+            return await HandleCommand(command);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCategory(int id)
+        {
+            return await HandleCommand(new DeleteCategoryCommand(id));
+        }
     }
 }
