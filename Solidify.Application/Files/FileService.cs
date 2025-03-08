@@ -99,10 +99,11 @@ namespace Solidify.Application.Files
         {
             return fileType switch
             {
-                FileType.CV => FileFolders.CVs,
                 FileType.License => FileFolders.Licenses,
                 FileType.SyndicateCard => FileFolders.SyndicateCards,
                 FileType.ProductImage => FileFolders.ProductImages,
+                FileType.Engineer => FileFolders.Engineers,
+                FileType.Company => FileFolders.Companies,
                 _ => FileFolders.Others
             };
         }
