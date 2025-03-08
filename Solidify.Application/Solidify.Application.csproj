@@ -25,4 +25,9 @@
     <ProjectReference Include="..\Solidify.Domain\Solidify.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="E-Commerce\Brands\Commands\" />
+    <Folder Include="E-Commerce\Brands\Queries\" />
+  </ItemGroup>
+
 </Project>
