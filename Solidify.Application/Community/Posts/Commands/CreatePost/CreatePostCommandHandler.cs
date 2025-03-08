@@ -18,7 +18,7 @@ namespace Solidify.Application.Community.Posts.Commands.CreatePost
         public async Task<GeneralResponseDto> Handle(CreatePostCommand request, CancellationToken cancellationToken)
         {
             var newPost = new Post();
-            if (request.ImageUris is not null)
+            if (request.ImageUris.Any())
             {
                 foreach (var image in request.ImageUris)
                 {
