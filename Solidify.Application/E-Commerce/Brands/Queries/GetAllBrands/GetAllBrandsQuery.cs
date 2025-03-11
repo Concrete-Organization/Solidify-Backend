@@ -1,17 +1,16 @@
 ﻿using MediatR;
-using Solidify.Application.Common;
 using Solidify.Application.Common.Dtos;
 using Solidify.Application.Common.Pagination;
-using Solidify.Domain.Entities.ECommerce;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Solidify.Application.E_Commerce.Categories.Query.GetAllCategories
+namespace Solidify.Application.E_Commerce.Brands.Queries
 {
-    public class GetAllCategoriesQuery : PaginatedQuery
+    public class GetAllBrandsQuery : PaginatedQuery
     {
+
     }
 }

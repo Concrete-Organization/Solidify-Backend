@@ -5,8 +5,10 @@ using Solidify.Application.Common;
 using Solidify.Application.Common.Dtos;
 using Solidify.Application.Common.Pagination;
 using Solidify.Application.E_Commerce.Categories.Dtos;
+using Solidify.Application.E_Commerce.Products.Dtos;
 using Solidify.Domain.Entities.ECommerce;
 using Solidify.Domain.Interfaces;
+using Solidify.Domain.Specification;
 using Solidify.Domain.Specification.CategorySpecifications;
 using System;
 using System.Collections.Generic;
@@ -22,6 +24,9 @@ namespace Solidify.Application.E_Commerce.Categories.Query.GetAllCategories
         {
             var spec = new CategorySpecifications(mapper.Map<CategorySpecificationsParameters>(request));
 
+           //var models =  new PagedResponse<ProductDto>(
+           //     mapper.Map<IEnumerable<ProductDto>>(products), request.PageSize,
+           //     request.PageNumber, count);
 
             var (categories,count) = await unitOfWork.GetRepository<Category>().GetAllAsync(spec);
             var categoriesDto = mapper.Map<IEnumerable<AllCategoriesDto>>(categories);
