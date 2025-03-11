@@ -23,7 +23,7 @@ namespace Solidify.Domain.Specification.ProductSpecifications
                     &&
                     (!args.MaxPrice.HasValue || p.Price <= args.MaxPrice)
                     &&
-                    (string.IsNullOrEmpty(args.SearchPhrase) || EF.Functions.Like(p.Name.ToLower(), $"%{args.SearchPhrase.ToLower()}%"))
+                    (string.IsNullOrEmpty(args.SearchedPhrase) || EF.Functions.Like(p.Name.ToLower(), $"%{args.SearchedPhrase.ToLower()}%"))
                 )
         {
             GetIncludes();
@@ -60,7 +60,7 @@ namespace Solidify.Domain.Specification.ProductSpecifications
         private void GetIncludes()
         {
             AddIncludes(p => p.Brand);
-            AddIncludes(p => p.Company);
+            AddIncludes(p => p.Supplier);
             AddIncludes(p => p.Category);
         }
     }

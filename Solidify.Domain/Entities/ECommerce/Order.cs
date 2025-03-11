@@ -7,12 +7,13 @@ namespace Solidify.Domain.Entities.ECommerce
     {
         public string Id { get; set; }
         public string UserId { get; set; }
-        public virtual ApplicationUser User { get; set; }
+        public virtual ApplicationUser? User { get; set; }
         public decimal TotalPrice { get; set; }
-        public OrderStatus OrderStatus { get; set; }
-        public DateTime OrderDate { get; set; }
+        public OrderStatus OrderStatus { get; set; } = OrderStatus.Pending;
+        public DateTime OrderDate { get; set; } = DateTime.Now;
+        public int ShippingAddressId { get; set; }
+        public virtual ShippingAddress? ShippingAddress { get; set; }
         public virtual ICollection<OrderItem>? Items { get; set; } = new HashSet<OrderItem>();
-        public virtual ICollection<ShippingDetails>? ShippingDetails { get; set; } = new HashSet<ShippingDetails>();
-        public virtual ICollection<CompanySales>? CompanySales { get; set; } = new HashSet<CompanySales>();
+        public virtual ICollection<SupplierSales>? SupplierSales { get; set; } = new HashSet<SupplierSales>();
     }
 }

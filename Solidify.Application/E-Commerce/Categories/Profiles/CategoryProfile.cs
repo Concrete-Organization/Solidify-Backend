@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Solidify.Application.E_Commerce.Categories.Dtos;
-using Solidify.Application.E_Commerce.Categories.Queries.GetAllCategories;
+using Solidify.Application.E_Commerce.Categories.Query.GetAllCategories;
+using Solidify.Application.E_Commerce.Products.Resolvers;
 using Solidify.Domain.Entities.ECommerce;
 using Solidify.Domain.Specification.CategorySpecifications;
 using System;
@@ -15,10 +16,9 @@ namespace Solidify.Application.E_Commerce.Categories.Profiles
     {
         public CategoryProfile()
         {
-            CreateMap<Category, CategoriesDto>();
-            CreateMap<Category, CategoryDto>();
-            CreateMap<GetAllCategoriesQuery, CategorySpecificationParameters>();
-
+            CreateMap<GetAllCategoriesQuery, CategorySpecificationsParameters>();
+            CreateMap<Category, CategoryDto>(); 
+            CreateMap<Category,AllCategoriesDto>();
         }
     }
 }

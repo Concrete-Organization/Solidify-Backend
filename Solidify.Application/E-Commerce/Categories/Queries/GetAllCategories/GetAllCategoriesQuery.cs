@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Solidify.Application.E_Commerce.Categories.Queries.GetAllCategories
+namespace Solidify.Application.E_Commerce.Categories.Query.GetAllCategories
 {
     public class GetAllCategoriesQuery : PaginatedQuery
     {

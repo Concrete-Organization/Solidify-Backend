@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Metadata;
 using Microsoft.AspNetCore.Mvc;
 using Solidify.Application.Accounts.Commands.Login;
+using Solidify.Application.Accounts.Commands.RefreshToken;
 using Solidify.Application.Accounts.Commands.Register;
 using Solidify.Application.Accounts.Commands.ResetPassword;
+using Solidify.Application.Accounts.Commands.RevokeToken;
 using Solidify.Application.Accounts.Commands.SendOtp;
 using Solidify.Application.Accounts.Commands.VerifyOtp;
 using Solidify.Application.Common.Dtos;
@@ -17,29 +19,16 @@ namespace Solidify.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
 
-    public class AccountController(IMediator mediator) : ControllerBase
+    public class AccountController(IMediator mediator) : BaseController(mediator)
     {
-
-        private async Task<IActionResult> HandleCommand<TCommand>(TCommand command) where TCommand : IRequest<GeneralResponseDto>
-        {
-            var result = await mediator.Send(command);
-            return StatusCode(result.StatusCode, result);
-        }
-
-
-        [HttpPost("registerUser")]
-        public async Task<IActionResult> Register([FromBody] RegisterUserCommand command)
-        {
-            return await HandleCommand(command);
-        }
         [HttpPost("registerEngineer")]
-        public async Task<IActionResult> RegisterEnginner([FromForm] RegisterEngineerCommand command)
+        public async Task<IActionResult> RegisterEngineer(RegisterEngineerCommand command)
         {
             return await HandleCommand(command);
         }
 
         [HttpPost("registerCompany")]
-        public async Task<IActionResult> RegisterCompany([FromForm] RegisterCompanyCommand command)
+        public async Task<IActionResult> RegisterCompany([FromForm]RegisterCompanyCommand command)
         {
             return await HandleCommand(command);
         }
@@ -49,6 +38,18 @@ namespace Solidify.API.Controllers
         {
             return await HandleCommand(command);
 
+        }
+        
+        [HttpPost("refreshToken")]
+        public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenCommand command)
+        {
+            return await HandleCommand(command);
+        }
+
+        [HttpDelete("revokeToken")]
+        public async Task<IActionResult> RevokeToken([FromBody] RevokeTokenCommand command)
+        {
+            return await HandleCommand(command);
         }
 
         [HttpPost("forgot-password")]

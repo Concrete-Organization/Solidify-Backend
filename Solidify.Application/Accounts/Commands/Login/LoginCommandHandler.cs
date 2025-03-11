@@ -35,14 +35,13 @@ public class LoginCommandHandler(UserManager<ApplicationUser> userManager
             };
         }
 
-        var roles = await userManager.GetRolesAsync(user);
-        var token = jwtService.GenerateToken(user, roles);
+        var authResponse = await jwtService.GenerateToken(user);
 
         return new GeneralResponseDto
         {
             IsSucceeded = true,
             Message = "Login successful",
-            Model = token,
+            Model = authResponse,
             StatusCode = 200
         };
     }

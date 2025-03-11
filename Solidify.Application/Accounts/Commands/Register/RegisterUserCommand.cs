@@ -30,6 +30,7 @@ namespace Solidify.Application.Accounts.Commands.Register
         [Required]
         [DataType(DataType.Password)]
         public string ConfirmPassword { get; set; }
+
     }
 
 }

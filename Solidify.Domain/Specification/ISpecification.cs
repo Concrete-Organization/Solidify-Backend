@@ -6,6 +6,7 @@ namespace Solidify.Domain.Specification
     {
         public Expression<Func<TEntity, bool>> Criteria { get; }
         public List<Expression<Func<TEntity, object>>> Includes { get; }
+        public List<string> IncludeStrings { get; }
         public Expression<Func<TEntity, object>> SortAsc { get; }
         public Expression<Func<TEntity, object>> SortDesc { get; }
         public int Take { get; }

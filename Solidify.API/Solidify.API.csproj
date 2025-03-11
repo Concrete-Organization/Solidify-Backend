@@ -4,6 +4,9 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>ba90772b-25fc-4733-8dc7-dc9367276512</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,6 +14,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 
@@ -20,12 +24,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\Uploads\Companies\" />
+    <Folder Include="wwwroot\Uploads\Engineers\" />
     <Folder Include="wwwroot\Uploads\Licenses\" />
+    <Folder Include="wwwroot\Uploads\ProductImages\" />
     <Folder Include="wwwroot\Uploads\SyndicateCards\" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\Uploads\CVs\abd1798c-0bb7-49b8-a0d3-00af71b09b61.png" />
     <None Include="wwwroot\Uploads\Others\7c49d15c-0edf-4d8f-bc44-43ae20cb2da0.png" />
   </ItemGroup>
 

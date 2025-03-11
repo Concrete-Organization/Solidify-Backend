@@ -17,6 +17,7 @@ namespace Solidify.Domain.Specification
         public Expression<Func<TEntity, bool>>? Criteria { get; }
 
         public List<Expression<Func<TEntity, object>>> Includes { get; private set; } = new();
+        public List<string> IncludeStrings { get; private set; } = new();
 
         public Expression<Func<TEntity, object>>? SortAsc { get; private set; }
         public Expression<Func<TEntity, object>>? SortDesc { get; private set; }
@@ -27,6 +28,8 @@ namespace Solidify.Domain.Specification
         protected void AddIncludes(Expression<Func<TEntity, object>> includeExpression) =>
             Includes.Add(includeExpression);
 
+        protected void AddIncludes(string includeString) => IncludeStrings.Add(includeString);
+        
         protected void AddSortAsc(Expression<Func<TEntity, object>> sortExpression) => SortAsc = sortExpression;
         protected void AddSortDesc(Expression<Func<TEntity, object>> sortExpression) => SortDesc = sortExpression;
 
