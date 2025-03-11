@@ -1,4 +1,5 @@
-﻿using Solidify.Application.Common;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Solidify.Application.Common;
 using Solidify.Application.Common.Dtos;
 using Solidify.Domain.Exceptions;
 
@@ -17,6 +18,13 @@ public class ErrorHandlingMiddleware : IMiddleware
             context.Response.StatusCode = StatusCodes.Status404NotFound;
             await context.Response.WriteAsJsonAsync(GeneralResponse.CreateResponse(false, StatusCodes.Status404NotFound,
                 null, notFound.Message));
+        }
+        catch (FavoriteAlreadyExistsException alreadyExistsException)
+        {
+            context.Response.StatusCode = StatusCodes.Status400BadRequest;
+            await context.Response.WriteAsJsonAsync(GeneralResponse.CreateResponse(false,
+                StatusCodes.Status400BadRequest,
+                null, alreadyExistsException.Message));
         }
         catch (Exception e)
         {
