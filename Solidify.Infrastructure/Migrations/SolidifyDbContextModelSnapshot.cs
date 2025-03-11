@@ -244,7 +244,7 @@ namespace Solidify.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Brands");
+                    b.ToTable("Brands", (string)null);
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.Category", b =>
@@ -261,7 +261,7 @@ namespace Solidify.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.Companies.ConcreteCompany", b =>
@@ -294,7 +294,7 @@ namespace Solidify.Infrastructure.Migrations
 
                     b.HasKey("CompanyId");
 
-                    b.ToTable("ConcreteCompanies");
+                    b.ToTable("ConcreteCompanies", (string)null);
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.Companies.Supplier", b =>
@@ -320,7 +320,7 @@ namespace Solidify.Infrastructure.Migrations
 
                     b.HasKey("SupplierId");
 
-                    b.ToTable("Suppliers");
+                    b.ToTable("Suppliers", (string)null);
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.Companies.SupplierSales", b =>
@@ -351,7 +351,7 @@ namespace Solidify.Infrastructure.Migrations
 
                     b.HasIndex("SupplierId");
 
-                    b.ToTable("SupplierSales");
+                    b.ToTable("SupplierSales", (string)null);
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.Order", b =>
@@ -381,7 +381,7 @@ namespace Solidify.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Orders");
+                    b.ToTable("Orders", (string)null);
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.OrderItem", b =>
@@ -413,7 +413,7 @@ namespace Solidify.Infrastructure.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderItems");
+                    b.ToTable("OrderItems", (string)null);
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.OrderPayment", b =>
@@ -438,7 +438,7 @@ namespace Solidify.Infrastructure.Migrations
 
                     b.HasIndex("OrderId");
 
-                    b.ToTable("OrderPayments");
+                    b.ToTable("OrderPayments", (string)null);
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.Product", b =>
@@ -490,7 +490,7 @@ namespace Solidify.Infrastructure.Migrations
 
                     b.HasIndex("SupplierId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.ProductReview", b =>
@@ -519,7 +519,7 @@ namespace Solidify.Infrastructure.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("ProductReviews");
+                    b.ToTable("ProductReviews", (string)null);
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.ECommerce.ShippingAddress", b =>
@@ -544,7 +544,7 @@ namespace Solidify.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ShippingAddresses");
+                    b.ToTable("ShippingAddresses", (string)null);
                 });
 
             modelBuilder.Entity("Solidify.Domain.Entities.Engineer", b =>
@@ -566,7 +566,7 @@ namespace Solidify.Infrastructure.Migrations
 
                     b.HasKey("EngineerId");
 
-                    b.ToTable("Engineers");
+                    b.ToTable("Engineers", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -622,7 +622,7 @@ namespace Solidify.Infrastructure.Migrations
 
             modelBuilder.Entity("Solidify.Domain.Entities.ApplicationUser", b =>
                 {
-                    b.OwnsMany("Solidify.Domain.Entities.RefreshToken", "RefreshTokens", b1 =>
+                    b.OwnsMany("Solidify.Domain.Entities.ApplicationUser.RefreshTokens#Solidify.Domain.Entities.RefreshToken", "RefreshTokens", b1 =>
                         {
                             b1.Property<string>("ApplicationUserId")
                                 .HasColumnType("nvarchar(450)");
@@ -648,7 +648,7 @@ namespace Solidify.Infrastructure.Migrations
 
                             b1.HasKey("ApplicationUserId", "Id");
 
-                            b1.ToTable("RefreshToken");
+                            b1.ToTable("RefreshToken", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("ApplicationUserId");

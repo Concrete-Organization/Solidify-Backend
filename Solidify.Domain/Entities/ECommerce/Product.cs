@@ -22,6 +22,11 @@ namespace Solidify.Domain.Entities.ECommerce
         public virtual Supplier Supplier { get; set; }
         //public string? AdminId { get; set; }
         //public virtual ApplicationUser? Admin { get; set; }
+        public virtual ICollection<ProductReview>? Reviews { get; set; } = new HashSet<ProductReview>();
+        public void CalculateRate()
+        {
+            Rate = Reviews.Select(r => r.UserRate).Sum() / Reviews.Count;
+        }
 
     }
 }
