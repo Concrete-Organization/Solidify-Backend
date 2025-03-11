@@ -27,7 +27,6 @@
 
   <ItemGroup>
     <Folder Include="E-Commerce\Brands\Commands\" />
-    <Folder Include="E-Commerce\Brands\Queries\" />
   </ItemGroup>
 
 </Project>
