@@ -60,6 +60,15 @@ namespace Solidify.Application.Extensions
 
                 };
             });
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
 
             services.AddAutoMapper(appAssembly);
             services.AddSingleton<IValueResolver<Product, ProductDto, string>, ProductImageUriResolver>();

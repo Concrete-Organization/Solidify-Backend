@@ -11,6 +11,7 @@ namespace Solidify.API.Controllers
     [Authorize]
     public class CommentController(IMediator mediator) : BaseController(mediator)
     {
+        [AllowAnonymous]
         [HttpGet("{postId}")]
         public async Task<IActionResult> GetAllComments(int postId)
         {
