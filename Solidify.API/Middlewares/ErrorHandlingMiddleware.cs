@@ -25,6 +25,13 @@ public class ErrorHandlingMiddleware : IMiddleware
             await context.Response.WriteAsJsonAsync(GeneralResponse.CreateResponse(false, StatusCodes.Status400BadRequest,
                 null, e.Message));
         }
+        catch (FavoriteAlreadyExistsException alreadyExistsException)
+        {
+            context.Response.StatusCode = StatusCodes.Status400BadRequest;
+            await context.Response.WriteAsJsonAsync(GeneralResponse.CreateResponse(false,
+                StatusCodes.Status400BadRequest,
+                null, alreadyExistsException.Message));
+        }
         catch (Exception e)
         {
             context.Response.StatusCode = StatusCodes.Status500InternalServerError;

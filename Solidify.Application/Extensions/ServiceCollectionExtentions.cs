@@ -72,7 +72,7 @@ namespace Solidify.Application.Extensions
 
             services.AddAutoMapper(appAssembly);
             services.AddSingleton<IValueResolver<Product, ProductDto, string>, ProductImageUriResolver>();
-
+            services.AddSingleton<IValueResolver<Product, ProductDetailsDto, string>, ProductDetailsImageUriResolver>(); services.AddSingleton<IValueResolver<Product, ProductDetailsDto, string>, ProductDetailsImageUriResolver>();
             services.AddSingleton<IValueResolver<Post, PostDto, List<string>>, PostImagesUriResolver>();
             services.AddScoped<IValueResolver<Comment, CommentDto, string?>, CommentProfileImageUriResolver>();
 

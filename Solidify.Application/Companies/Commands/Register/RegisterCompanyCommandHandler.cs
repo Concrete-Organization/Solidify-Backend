@@ -42,7 +42,7 @@ namespace Solidify.Application.Companies.Commands.Register
 
             var company = new ConcreteCompany
             {   
-                CompanyId = user.Id,
+                ConcreteCompanyId = user.Id,
                 CompanyName = request.CompanyName,
                 CommericalLicense = licenseUploadResult.Model.ToString(),
                 CommericalNumber = request.CommericalNumber,
