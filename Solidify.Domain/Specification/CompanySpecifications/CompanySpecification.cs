@@ -9,7 +9,7 @@ namespace Solidify.Domain.Specification.CompanySpecification
 {
     public class CompanySpecification : BaseSpecification<ConcreteCompany>
     {
-        public CompanySpecification(string id) : base(c=>c.CompanyId == id)
+        public CompanySpecification(string id) : base(c=>c.ConcreteCompanyId == id)
         {
             getInclude();
         }

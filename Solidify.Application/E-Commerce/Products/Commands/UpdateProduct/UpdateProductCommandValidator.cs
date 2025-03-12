@@ -1,8 +1,9 @@
 ﻿using FluentValidation;
+using Solidify.Application.E_Commerce.Products.Dtos;
 
 namespace Solidify.Application.E_Commerce.Products.Commands.UpdateProduct
 {
-    public class UpdateProductCommandValidator : AbstractValidator<UpdateProductCommand>
+    public class UpdateProductCommandValidator : AbstractValidator<UpdateProductDto>
     {
         public UpdateProductCommandValidator()
         {

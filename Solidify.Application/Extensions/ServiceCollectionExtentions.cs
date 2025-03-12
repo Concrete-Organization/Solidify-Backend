@@ -57,7 +57,8 @@ namespace Solidify.Application.Extensions
             });
 
             services.AddAutoMapper(appAssembly);
-            services.AddSingleton<IValueResolver<Product, ProductDto, string>, ImageUriResolver>();
+            services.AddSingleton<IValueResolver<Product, ProductDto, string>, ProductImageUriResolver>();
+            services.AddSingleton<IValueResolver<Product, ProductDetailsDto, string>, ProductDetailsImageUriResolver>();
             //services.AddTransient(provider =>
             //new ImageUriResolver<Product, ProductDto>(provider.GetRequiredService<IHttpContextAccessor>(), FileFolders.ProductImages));
 

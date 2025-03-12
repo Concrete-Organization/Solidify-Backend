@@ -26,7 +26,7 @@ namespace Solidify.Application.E_Commerce.Reviews.Commands.CreateReview
 
             var review = new ProductReview()
             {
-                Id = Guid.NewGuid().ToString(), Message = request.Message, UserId = userId,
+                Id = Guid.NewGuid().ToString(), Message = request.Message, ConcreteCompanyId = userId,
                 ProductId = request.ProductId, UserRate = request.UserRate
             };
 

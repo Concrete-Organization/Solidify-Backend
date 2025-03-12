@@ -22,6 +22,6 @@ public class GetProductByIdQueryHandler(IUnitOfWork unitOfWork,
         var product = await productRepository.GetAsync(new ProductsSpecification(request.Id))
                       ?? throw new NotFoundException(nameof(Product), request.Id);
 
-        return GeneralResponse.CreateResponse(true, 200, mapper.Map<ProductDto>(product), "");
+        return GeneralResponse.CreateResponse(true, 200, mapper.Map<ProductDetailsDto>(product), "");
     }
 }

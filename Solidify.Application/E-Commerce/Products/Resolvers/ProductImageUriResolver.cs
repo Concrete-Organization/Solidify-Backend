@@ -5,7 +5,7 @@ using Solidify.Domain.Entities.ECommerce;
 
 namespace Solidify.Application.E_Commerce.Products.Resolvers
 {
-    public class ImageUriResolver(IHttpContextAccessor httpContextAccessor) : IValueResolver<Product, ProductDto, string>
+    public class ProductImageUriResolver(IHttpContextAccessor httpContextAccessor) : IValueResolver<Product, ProductDto, string>
     {
         public string Resolve(Product source, ProductDto destination, string destMember, ResolutionContext context)
         {
