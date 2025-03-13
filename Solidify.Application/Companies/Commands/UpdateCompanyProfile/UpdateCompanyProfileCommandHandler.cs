@@ -66,7 +66,7 @@ namespace Solidify.Application.Companies.Commands.UpdateCompanyProfile
 
             var httpContext = httpContextAccessor.HttpContext;
             var baseUri = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";
-            var companyUri = $"{baseUri}/api/companyProfile/{company.CompanyId}";
+            var companyUri = $"{baseUri}/api/companyProfile/{company.ConcreteCompanyId}";
 
             return GeneralResponse.CreateResponse(true, 201, companyUri, "Company Updated Successfully");
         }

@@ -62,6 +62,8 @@ namespace Solidify.Domain.Specification.ProductSpecifications
             AddIncludes(p => p.Brand);
             AddIncludes(p => p.Supplier);
             AddIncludes(p => p.Category);
+            AddIncludes(p => p.Reviews);
+            AddIncludes($"{nameof(Product.Reviews)}.{nameof(ProductReview.ConcreteCompany)}");
         }
     }
 }

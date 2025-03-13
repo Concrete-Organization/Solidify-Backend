@@ -15,6 +15,7 @@ using Solidify.Application.Community.Posts.Dtos;
 using Solidify.Application.Community.Posts.Resolvers;
 using Solidify.Application.E_Commerce.Products.Dtos;
 using Solidify.Application.E_Commerce.Products.Resolvers;
+using Solidify.Application.E_Commerce.Reviews.Dtos;
 using Solidify.Application.Email.Services;
 using Solidify.Application.Email.Setting;
 using Solidify.Application.Files;
@@ -27,6 +28,7 @@ using Solidify.Domain.Constants;
 using Solidify.Domain.Entities.ECommerce;
 using Solidify.Domain.Enums;
 using Solidify.Domain.Interfaces.Services.Cashing;
+using Solidify.Application.E_Commerce.Reviews.Resolvers;
 
 namespace Solidify.Application.Extensions
 {
@@ -60,14 +62,25 @@ namespace Solidify.Application.Extensions
 
                 };
             });
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", builder =>
+                {
+                    builder.AllowAnyOrigin()
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
 
             services.AddAutoMapper(appAssembly);
             services.AddSingleton<IValueResolver<Product, ProductDto, string>, ProductImageUriResolver>();
-
+            services.AddSingleton<IValueResolver<Product, ProductDetailsDto, string>, ProductDetailsImageUriResolver>(); services.AddSingleton<IValueResolver<Product, ProductDetailsDto, string>, ProductDetailsImageUriResolver>();
             services.AddSingleton<IValueResolver<Post, PostDto, List<string>>, PostImagesUriResolver>();
             services.AddScoped<IValueResolver<Comment, CommentDto, string?>, CommentProfileImageUriResolver>();
 
             services.AddScoped<IValueResolver<Post, PostDto, string?>, PostProfileImageUriResolver>();
+
+            services.AddScoped<IValueResolver<ProductReview, ReviewDto, string?>, ReviewCompanyImageUriResolver>();
 
             services.AddValidatorsFromAssembly(appAssembly)
                 .AddFluentValidationAutoValidation();

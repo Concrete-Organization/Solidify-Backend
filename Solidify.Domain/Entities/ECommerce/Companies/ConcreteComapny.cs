@@ -13,7 +13,7 @@ namespace Solidify.Domain.Entities.ECommerce.Companies
     {
         [Key]
         [ForeignKey("User")]
-        public string CompanyId { get; set; }
+        public string ConcreteCompanyId { get; set; }
         public ApplicationUser User { get; set; }
         public string CompanyName { get; set; }
         public string? CommericalNumber { get; set; }
