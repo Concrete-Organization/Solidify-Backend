@@ -1,8 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Solidify.Application.E_Commerce.Brands.Commands.UpdateBrand;
 using Solidify.Application.E_Commerce.Categories.Commands;
 using Solidify.Application.E_Commerce.Categories.Commands.DeleteCategory;
+using Solidify.Application.E_Commerce.Categories.Commands.UpdateBrand;
 using Solidify.Application.E_Commerce.Categories.Queries;
 using Solidify.Application.E_Commerce.Categories.Query.GetAllCategories;
 
@@ -35,6 +37,11 @@ namespace Solidify.API.Controllers
         public async Task<IActionResult> DeleteCategory(int id)
         {
             return await HandleCommand(new DeleteCategoryCommand(id));
+        }
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> UpdateCategory(int id)
+        {
+            return await HandleCommand(new UpdateCategoryCommand(id));
         }
     }
 }
