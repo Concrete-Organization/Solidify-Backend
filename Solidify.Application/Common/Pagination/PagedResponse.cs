@@ -12,7 +12,7 @@ public class PagedResponse<TResponse>
         TotalPages = (int)Math.Ceiling(itemsCount / (decimal)pageSize);
         ItemsTo = (pageNumber == TotalPages) ? ItemsTo = itemsCount : ItemsFrom + pageSize - 1;
 
-        if (pageNumber > TotalPages)
+        if (itemsCount > 0 && pageNumber > TotalPages)
             throw new BadRequestException("Page Number cannot be greater than Total Pages");
 
     }
