@@ -7,5 +7,6 @@ namespace Solidify.Application.Community.Replies.Dtos
         public string Content { get; set; }
         public DateTime CreationDate { get; set; } = DateTime.Now;
         public int LikesCount { get; set; }
+        public bool IsLiked { get; set; }
     }
 }

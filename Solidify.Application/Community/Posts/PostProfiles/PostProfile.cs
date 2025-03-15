@@ -16,7 +16,8 @@ namespace Solidify.Application.Community.Posts.PostProfiles
                 .ForMember(dest => dest.EngineerName, opt => opt.MapFrom(src => src.Engineer.EngineerName))
                 .ForMember(dest => dest.ProfileImageUrl, opt => opt.MapFrom<PostProfileImageUriResolver>())
                 .ForMember(dest => dest.LikesCount, opt => opt.MapFrom(src => src.Likes.Count()))
-                .ForMember(dest => dest.CommentsCount, opt => opt.MapFrom(src => src.Comments.Count()));
+                .ForMember(dest => dest.CommentsCount, opt => opt.MapFrom(src => src.Comments.Count()))
+                .ForMember(dest => dest.IsLiked, opt => opt.MapFrom<PostIsLikedResolver>());
             CreateMap<GetAllPostsQuery, PostSpecificationParameters>();
         }
     }

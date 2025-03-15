@@ -9,6 +9,7 @@ namespace Solidify.Application.Community.Comments.Dtos
         public string Content { get; set; }
         public DateTime CreationDate { get; set; }
         public int LikesCount { get; set; }
+        public bool IsLiked { get; set; }
         public List<ReplyDto> Replies { get; set; }
     }
 }
