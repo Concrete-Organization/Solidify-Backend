@@ -13,6 +13,7 @@ using Solidify.Application.Community.Comments.Dtos;
 using Solidify.Application.Community.Comments.Resolvers;
 using Solidify.Application.Community.Posts.Dtos;
 using Solidify.Application.Community.Posts.Resolvers;
+using Solidify.Application.Community.Replies.Dtos;
 using Solidify.Application.E_Commerce.Products.Dtos;
 using Solidify.Application.E_Commerce.Products.Resolvers;
 using Solidify.Application.E_Commerce.Reviews.Dtos;
@@ -81,6 +82,10 @@ namespace Solidify.Application.Extensions
             services.AddScoped<IValueResolver<Post, PostDto, string?>, PostProfileImageUriResolver>();
 
             services.AddScoped<IValueResolver<ProductReview, ReviewDto, string?>, ReviewCompanyImageUriResolver>();
+            
+            services.AddScoped<IValueResolver<Post, PostDto, bool>, PostIsLikedResolver>();
+            services.AddScoped<IValueResolver<Comment, CommentDto, bool>, CommentIsLikedResolver>();
+            services.AddScoped<IValueResolver<Reply, ReplyDto, bool>, ReplyIsLikedResolver>();
 
             services.AddValidatorsFromAssembly(appAssembly)
                 .AddFluentValidationAutoValidation();
