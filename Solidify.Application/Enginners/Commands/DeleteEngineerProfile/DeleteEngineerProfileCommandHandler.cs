@@ -31,7 +31,7 @@ namespace Solidify.Application.Enginners.Commands.DeleteEngineerProfile
             eng.ProfileImageUrl = null;
              await unitOfWork.Commit();
 
-            return GeneralResponse.CreateResponse(true, 201, eng, "Profile Picture Deleted Successfully");
+            return GeneralResponse.CreateResponse(true, 201, null, "Profile Picture Deleted Successfully");
 
         }
     }
