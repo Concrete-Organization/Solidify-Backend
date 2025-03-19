@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Solidify.Application.E_Commerce.Products.Commands.UpdateProduct;
+using Solidify.Application.Enginners.Commands.DeleteEngineerProfile;
 using Solidify.Application.Enginners.Commands.UpdateEngineerProfile;
 using Solidify.Application.Enginners.Dtos;
 using Solidify.Application.Enginners.Queries.GetEngineerQuery;
@@ -29,5 +30,12 @@ namespace Solidify.API.Controllers
 
             return await HandleCommand(a);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteProfile(string id)
+        {
+            return await HandleCommand(new DeleteEngineerProfileCommand(id));
+        }
+
     }
 }
