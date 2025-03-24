@@ -12,7 +12,7 @@ namespace Solidify.Application.Community.Posts.Resolvers
             var httpContext = httpContextAccessor.HttpContext;
             var baseUri = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}";
 
-            if (source.Engineer.ProfileImageUrl is not null)
+            if (source.Engineer != null &&  source.Engineer.ProfileImageUrl is not null)
                 destination.ProfileImageUrl = $"{baseUri}/Uploads/Engineers/{source.Engineer.ProfileImageUrl}";
 
 
