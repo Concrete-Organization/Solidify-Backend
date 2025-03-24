@@ -6,7 +6,8 @@ namespace Solidify.Domain.Specification.ReplySpecifications
     {
         public ReplySpecification(int replyId) : base(r => r.Id == replyId)
         {
-            
+            AddIncludes(c => c.Engineer);
+            //AddIncludes($"{nameof(Comment.Replies)}.{nameof(Reply.Likes)}");
         }
     }
 }

@@ -8,6 +8,7 @@ namespace Solidify.Domain.Specification.CommentSpecifications
         {
             AddIncludes(c => c.Engineer);
             AddIncludes($"{nameof(Comment.Replies)}.{nameof(Reply.Likes)}");
+            AddIncludes($"{nameof(Comment.Replies)}.{nameof(Reply.Engineer)}");
             AddIncludes(c => c.Likes);
         }
     }
