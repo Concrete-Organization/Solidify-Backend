@@ -24,9 +24,9 @@ namespace Solidify.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateOrder()
+        public async Task<IActionResult> CreateOrder(CreateOrderCommand command)
         {
-            return await HandleCommand(new CreateOrderCommand());
+            return await HandleCommand(command);
         }
 
         [HttpPost("cancel/{orderId}")]

@@ -1,4 +1,5 @@
-﻿using Solidify.Domain.Entities.ECommerce;
+﻿using Solidify.Application.E_Commerce.ShippingAddresses.Dtos;
+using Solidify.Domain.Entities.ECommerce;
 using Solidify.Domain.Enums;
 
 namespace Solidify.Application.E_Commerce.Orders.Dtos
