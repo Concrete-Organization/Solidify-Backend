@@ -33,7 +33,8 @@ namespace Solidify.Application.E_Commerce.Orders.Commands.CreateOrder
             {
                 Id = Guid.NewGuid().ToString(),
                 UserId = userId,
-                TotalPrice = cart.TotalPrice
+                TotalPrice = cart.TotalPrice,
+                ShippingAddressId = request.ShippingAddressId
             };
 
             await orderRepository.AddAsync(order);

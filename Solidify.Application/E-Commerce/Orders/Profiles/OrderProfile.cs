@@ -17,7 +17,6 @@ namespace Solidify.Application.E_Commerce.Orders.Profiles
 
             CreateMap<Order, OrderDetailsDto>();
 
-            CreateMap<ShippingAddress, ShippingAddressDto>();
         }
     }
 }

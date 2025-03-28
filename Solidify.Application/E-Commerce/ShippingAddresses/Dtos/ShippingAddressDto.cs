@@ -1,4 +1,4 @@
-﻿namespace Solidify.Application.E_Commerce.Orders.Dtos
+﻿namespace Solidify.Application.E_Commerce.ShippingAddresses.Dtos
 {
     public class ShippingAddressDto
     {

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Solidify.Application.Common;
 using Solidify.Application.Common.Dtos;
 using Solidify.Application.E_Commerce.Orders.Dtos;
+using Solidify.Application.E_Commerce.ShippingAddresses.Dtos;
 using Solidify.Domain.Entities.ECommerce;
 using Solidify.Domain.Exceptions;
 using Solidify.Domain.Interfaces;
