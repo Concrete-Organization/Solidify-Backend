@@ -36,6 +36,7 @@ namespace Solidify.Application.E_Commerce.Orders.Commands.CreateOrder
                 TotalPrice = cart.TotalPrice,
                 ShippingAddressId = request.ShippingAddressId
             };
+            
 
             await orderRepository.AddAsync(order);
 
@@ -52,7 +53,7 @@ namespace Solidify.Application.E_Commerce.Orders.Commands.CreateOrder
 
             await cacheService.RemoveAsync($"cart_{userId}");
 
-            return GeneralResponse.CreateResponse(true, StatusCodes.Status204NoContent, null,
+            return GeneralResponse.CreateResponse(true, StatusCodes.Status201Created, null,
                 $"Order #[{order.Id}] Created successfully");
         }
     }
