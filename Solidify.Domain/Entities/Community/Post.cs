@@ -7,7 +7,7 @@ namespace Solidify.Domain.Entities.Community
         public int Id { get; set; }
         public string? Content { get; set; }
         public List<string> ImageUris { get; set; } = new List<string>();
-        public DateTime CreationDate { get; set; } = DateTime.Now;
+        public DateTime CreationDate { get; set; } = DateTime.UtcNow;
         public string EngineerId { get; set; }
         public Engineer Engineer { get; set; }
         public virtual ICollection<Comment>? Comments { get; set; } = new HashSet<Comment>();

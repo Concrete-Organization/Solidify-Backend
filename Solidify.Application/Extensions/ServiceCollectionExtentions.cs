@@ -59,6 +59,8 @@ namespace Solidify.Application.Extensions
                     ValidIssuer = configuration["Jwt:Issuer"],
                     ValidateAudience = true,
                     ValidAudience = configuration["Jwt:Audience"],
+                    ValidateLifetime = true,
+                    ClockSkew = TimeSpan.FromDays(2),
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"])),
 
                 };

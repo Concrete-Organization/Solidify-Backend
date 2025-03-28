@@ -6,10 +6,11 @@ using Solidify.Application.Community.Posts.Queries.GetAllPosts;
 
 namespace Solidify.API.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     [Authorize]
     public class PostController(IMediator mediator) : BaseController(mediator)
     {
-        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetPosts([FromQuery]GetAllPostsQuery query)
         {

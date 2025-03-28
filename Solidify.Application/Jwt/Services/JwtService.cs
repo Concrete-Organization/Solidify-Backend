@@ -40,7 +40,7 @@ namespace Solidify.Application.Jwt.Services
                 issuer: jwtSettings.CurrentValue.Issuer,
                 audience: jwtSettings.CurrentValue.Audience,
                 claims: claims,
-                expires: DateTime.Now.AddHours(expireHours),
+                expires: DateTime.UtcNow.AddHours(expireHours),
                 signingCredentials: creds);
 
             var authResponseDto = new AuthResponseDto();
