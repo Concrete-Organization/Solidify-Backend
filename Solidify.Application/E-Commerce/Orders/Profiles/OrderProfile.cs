@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Solidify.Application.E_Commerce.Orders.Dtos;
+using Solidify.Application.E_Commerce.Orders.Resolvers;
 using Solidify.Domain.Entities.ECommerce;
 
 namespace Solidify.Application.E_Commerce.Orders.Profiles
@@ -13,7 +14,9 @@ namespace Solidify.Application.E_Commerce.Orders.Profiles
 
             CreateMap<Order, GetAllOrdersDto>();
 
-            CreateMap<OrderItem, OrderItemDto>();
+            CreateMap<OrderItem, OrderItemDto>()
+                .ForMember(dest => dest.ImageUri, opt => opt.MapFrom<OrderItemImageUriResolver>())
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Product.Name));
 
             CreateMap<Order, OrderDetailsDto>();
 

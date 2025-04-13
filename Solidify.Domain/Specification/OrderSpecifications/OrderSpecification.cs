@@ -16,6 +16,8 @@ namespace Solidify.Domain.Specification.OrderSpecifications
         public OrderSpecification(string orderId): base(o => o.Id == orderId)
         {
             AddIncludes(o => o.Items);
+            AddIncludes($"{nameof(Order.Items)}.{nameof(OrderItem.Product)}");
+
             AddIncludes(o => o.ShippingAddress);
         }
     }

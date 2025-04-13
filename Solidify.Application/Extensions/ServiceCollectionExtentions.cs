@@ -105,6 +105,8 @@ namespace Solidify.Application.Extensions
             services.AddSingleton<ICacheService, CacheService>();
 
             services.AddScoped<ICurrentUser, CurrentUser>();
+
+            services.AddHttpContextAccessor();
         }
 
     }
