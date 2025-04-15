@@ -1,8 +1,10 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices.JavaScript;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using Microsoft.OpenApi.Models;
 using Solidify.API.Middlewares;
 using Solidify.Application.Common;
@@ -13,9 +15,14 @@ public static class ServiceCollectionExtensions
 {
     public static void AddPresentation(this IServiceCollection services)
     {
-        services.AddControllers();
-        
-        services.ConfigureModelStateErrors();
+        services.AddControllers()
+            .AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+            });
+    }
+
+    services.ConfigureModelStateErrors();
 
         services.AddSwagger();
 
