@@ -20,7 +20,7 @@ public static class ServiceCollectionExtensions
             {
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
             });
-    }
+    
 
     services.ConfigureModelStateErrors();
 
