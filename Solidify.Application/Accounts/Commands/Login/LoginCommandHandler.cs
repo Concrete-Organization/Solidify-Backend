@@ -24,7 +24,7 @@ public class LoginCommandHandler(UserManager<ApplicationUser> userManager
             };
         }
 
-        var result = await signInManager.CheckPasswordSignInAsync(user, request.Password, false);
+        var result = await signInManager.PasswordSignInAsync(user, request.Password, false,false);
         if (!result.Succeeded)
         {
             return new GeneralResponseDto
