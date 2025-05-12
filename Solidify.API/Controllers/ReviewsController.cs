@@ -14,10 +14,15 @@ namespace Solidify.API.Controllers
     {
         [Authorize]
         [HttpPost("{productId}")]
-        public async Task<IActionResult> AddProductReview([FromRoute]CreateReviewCommand command, [FromBody]CreateReviewDto dto)
+        public async Task<IActionResult> AddProductReview([FromRoute]string productId, [FromBody]CreateReviewDto dto)
         {
-            command.Message = dto.Message;
-            command.UserRate = dto.UserRate;
+            var command = new CreateReviewCommand
+            {
+                Message = dto.Message,
+                UserRate = dto.UserRate,
+                ProductId = productId
+            };
+           
             return await HandleCommand(command);
         }
     }
